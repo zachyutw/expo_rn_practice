@@ -19,6 +19,7 @@ export default {
                 },
             },
             Start: 'start',
+            Authorization: 'authorization',
             NotFound: '*',
         },
     },

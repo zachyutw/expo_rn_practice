@@ -58,8 +58,10 @@ Add additional notes about how to deploy this on a live system
 ## Built With
 
 -   [expo]()
+    -   expo-location
+    -   expo-av
 -   [typescript]()
--   [ui-kitten]()
+-   [ui-kitten](https://akveo.github.io/react-native-ui-kitten/docs/getting-started/what-is-ui-kitten#what-is-ui-kitten)
     -   custom-theme
     -   custom-mapping
 -   [eslint]()
@@ -68,10 +70,11 @@ Add additional notes about how to deploy this on a live system
 -   [redux-persist]()
 -   [redux-thunk]()
 -   [lottie]()
+-   [react-hook-form](https://react-hook-form.com/)
 
-## Contributing
+## App Pages
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+StartPage -> Authorization
 
 ## Versioning
 

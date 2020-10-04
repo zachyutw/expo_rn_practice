@@ -12,6 +12,7 @@ import { RootStackParamList } from '../types';
 import BottomTabNavigator from './BottomTabNavigator';
 import LinkingConfiguration from './LinkingConfiguration';
 import StartScreen from '../screens/StartScreen';
+import AuthorizationScreen from '../screens/AuthorizationScreen';
 
 // If you are not familiar with React Navigation, we recommend going through the
 // "Fundamentals" guide: https://reactnavigation.org/docs/getting-started
@@ -38,6 +39,10 @@ function RootNavigator() {
     return (
         <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name="Start" component={StartScreen} />
+            <Stack.Screen
+                name="Authorization"
+                component={AuthorizationScreen}
+            />
             <Stack.Screen name="Root" component={BottomTabNavigator} />
             <Stack.Screen
                 name="NotFound"

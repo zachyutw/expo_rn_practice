@@ -1,10 +1,8 @@
 import React, { useEffect } from 'react';
-import { View, Dimensions, StyleSheet } from 'react-native';
-import { Button, useTheme, Text } from '@ui-kitten/components';
-import { Props } from '@ui-kitten/components/devsupport/services/props/props.service';
-// import { Text } from '../components/Themed';
-import { useDeviceOrientation } from '@react-native-community/hooks';
+import { Dimensions, StyleSheet } from 'react-native';
+import { Button, useTheme, Text, Layout } from '@ui-kitten/components';
 import LottieBackground from '../components/Background/LottieBackground';
+import MatchUserCard from '../components/Card/MatchUserCard';
 
 const styles = StyleSheet.create({
     screen: {
@@ -12,7 +10,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'space-between',
-        backgroundColor: '#66c5b8',
+
         paddingBottom: 100,
         paddingTop: 100,
         color: '#fff',
@@ -41,12 +39,12 @@ const start = {
     GET_STARTED: 'GET STARTED',
 };
 const { GET_STARTED } = start;
-export default function StartScreen({ navigation }: Props) {
+export default function StartScreen({ navigation }: any) {
     // const {} = useDeviceOrientation();
     const theme = useTheme();
     useEffect(() => {}, []);
     return (
-        <View
+        <Layout
             style={[
                 styles.screen,
                 { backgroundColor: theme['color-primary-default'] },
@@ -56,15 +54,15 @@ export default function StartScreen({ navigation }: Props) {
             <LottieBackground
                 source={require('../assets/lotties/lottie1.json')}
             />
-            <View>
-                <Text style={styles.titleText}>Welcome</Text>
-            </View>
+
+            <Text style={styles.titleText}>Welcome</Text>
+            <MatchUserCard />
             <Button
                 style={[styles.getStartButton]}
-                onPress={() => navigation.replace('Root')}
+                onPress={() => navigation.navigate('Authorization')}
             >
                 {GET_STARTED}
             </Button>
-        </View>
+        </Layout>
     );
 }
