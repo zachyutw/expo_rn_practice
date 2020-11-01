@@ -4,7 +4,7 @@
 import React, { FunctionComponent } from 'react';
 import { Layout, Input, Button } from '@ui-kitten/components';
 import { StyleSheet } from 'react-native';
-import PasswordInput from '../../components/Input/PasswordInput';
+import PasswordInput from '../../components/Form/PasswordInput';
 import { useForm, Controller } from 'react-hook-form';
 import {
     getFieldPropsWithUseForm,
@@ -32,12 +32,10 @@ const styles = StyleSheet.create({
     },
     input: {
         flex: 1,
-        flexBasis: '80%',
+        flexBasis: '100%',
         flexGrow: 1,
-        marginLeft: 50,
-        marginRight: 50,
         marginTop: 14,
-        marginBottom: 14,
+        marginBottom: 28,
     },
 });
 
@@ -115,13 +113,15 @@ const SignUpForm: FunctionComponent<FormProps> = ({ onSubmit }) => {
                 }}
                 defaultValue=""
             />
-            <Button
-                style={styles.input}
-                disabled={!formState.isValid}
-                onPress={handleSubmit(onSubmit)}
-            >
-                Submit
-            </Button>
+            <Layout style={styles.input}>
+                <Button
+                    style={styles.input}
+                    disabled={!formState.isValid}
+                    onPress={handleSubmit(onSubmit)}
+                >
+                    Submit
+                </Button>
+            </Layout>
         </Layout>
     );
 };

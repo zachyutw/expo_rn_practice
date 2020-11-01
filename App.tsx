@@ -5,20 +5,20 @@ import * as eva from '@eva-design/eva';
 import { Provider } from 'react-redux';
 import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
-import { PersistGate } from 'redux-persist/integration/react';
 import * as SplashScreen from 'expo-splash-screen';
-
+import LoadAssets from './components/AppLoading/LoadAssets';
 import useCachedResources from './hooks/useCachedResources';
 import useColorScheme from './hooks/useColorScheme';
 import Navigation from './navigation';
 import configureStore from './redux/configureStore';
-
+import { ThemeProvider } from './styles/Theme';
 import { theme } from './styles/custom-theme';
+import fonts from './styles/fonts';
 
-export default function App() {
+function App() {
     const isLoadingComplete = useCachedResources();
     const colorScheme = useColorScheme();
-    const { store, persistor } = configureStore();
+    const { store } = configureStore();
 
     useEffect(() => {
         SplashScreen.preventAutoHideAsync();
@@ -28,17 +28,22 @@ export default function App() {
         return null;
     } else {
         return (
-            <SafeAreaProvider>
-                <IconRegistry icons={EvaIconsPack} />
-                <Provider store={store}>
-                    <PersistGate loading={null} persistor={persistor}>
-                        <ApplicationProvider {...eva} theme={theme}>
-                            <Navigation colorScheme={colorScheme} />
-                            <StatusBar />
-                        </ApplicationProvider>
-                    </PersistGate>
-                </Provider>
-            </SafeAreaProvider>
+            <ThemeProvider>
+                <LoadAssets {...{ fonts, assets: [] }}>
+                    <SafeAreaProvider>
+                        <IconRegistry icons={EvaIconsPack} />
+                        <Provider store={store}>
+                            <ApplicationProvider {...eva} theme={theme}>
+                                <Navigation colorScheme={colorScheme} />
+                                <StatusBar />
+                            </ApplicationProvider>
+                        </Provider>
+                    </SafeAreaProvider>
+                </LoadAssets>
+            </ThemeProvider>
         );
     }
 }
+
+const STORYBOOK_START = false;
+export default STORYBOOK_START ? require('./storybook').default : App;

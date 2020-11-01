@@ -2,7 +2,11 @@ import React, { useEffect } from 'react';
 import { Dimensions, StyleSheet } from 'react-native';
 import { Button, useTheme, Text, Layout } from '@ui-kitten/components';
 import LottieBackground from '../components/Background/LottieBackground';
-import MatchUserCard from '../components/Card/MatchUserCard';
+import UserCoverCard from '../components/User/UserCoverCard';
+import getProducts from '../apis/productsApi';
+import { increment, decrement } from '../redux/slices/counterSlice';
+import { fetchProducts } from '../redux/slices/productSlice';
+import { useSelector, useDispatch } from 'react-redux';
 
 const styles = StyleSheet.create({
     screen: {
@@ -42,7 +46,13 @@ const { GET_STARTED } = start;
 export default function StartScreen({ navigation }: any) {
     // const {} = useDeviceOrientation();
     const theme = useTheme();
-    useEffect(() => {}, []);
+    const dispatch = useDispatch();
+    const counter = useSelector(({ counter }) => counter);
+    const productState = useSelector(({ product }) => product);
+    useEffect(() => {
+        dispatch(fetchProducts());
+    }, [counter]);
+    console.log(productState);
     return (
         <Layout
             style={[
@@ -56,12 +66,24 @@ export default function StartScreen({ navigation }: any) {
             />
 
             <Text style={styles.titleText}>Welcome</Text>
-            <MatchUserCard />
+            <UserCoverCard />
             <Button
                 style={[styles.getStartButton]}
                 onPress={() => navigation.navigate('Authorization')}
             >
                 {GET_STARTED}
+            </Button>
+            <Button
+                style={[styles.getStartButton]}
+                onPress={() => dispatch(increment())}
+            >
+                {'increase'}
+            </Button>
+            <Button
+                style={[styles.getStartButton]}
+                onPress={() => dispatch(decrement())}
+            >
+                {'decrement'}
             </Button>
         </Layout>
     );

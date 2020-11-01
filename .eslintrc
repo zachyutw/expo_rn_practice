@@ -4,17 +4,12 @@
         "es6": true,
         "node": true
     },
-    "extends": [
-        "airbnb",
-        "plugin:react/recommended",
-        "prettier",
-        "prettier/react"
-    ],
+    "extends": ["plugin:react/recommended", "prettier", "prettier/react"],
     "rules": {
         "react/jsx-filename-extension": [
             1,
             {
-                "extensions": [".js", ".jsx", "tsx"]
+                "extensions": [".js", ".jsx", ".tsx", ".ts", "tsx"]
             }
         ],
         "prettier/prettier": [

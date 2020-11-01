@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 const MetroConfig = require('@ui-kitten/metro-config');
 
 const evaConfig = {

@@ -67,10 +67,11 @@ Add additional notes about how to deploy this on a live system
 -   [eslint]()
 -   [prettier](e)
 -   [redux]()
--   [redux-persist]()
+-   [redux-toolkit](https://redux-toolkit.js.org/)
 -   [redux-thunk]()
 -   [lottie]()
 -   [react-hook-form](https://react-hook-form.com/)
+-   [storybook](https://medium.com/dooboolab/setup-storybook-with-react-native-typescript-project-774eea7a7719)
 
 ## App Pages
 
