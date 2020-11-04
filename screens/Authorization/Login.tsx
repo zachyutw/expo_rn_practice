@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { TextInput as RNTextInput } from 'react-native';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -10,8 +10,10 @@ import { Container, Text, Box } from '../../components/Basic';
 import { AuthNavigationProps } from './index';
 import TextInput from '../../components/Form/TextInput';
 import Checkbox from '../../components/Form/Checkbox';
-
 import Footer from './components/Footer';
+import { signInWithEmailAndPassword } from '../../redux/slices/authorizationSlice';
+import { useAppDispatch, useAppSelector } from '../../redux/store';
+import { unwrapResult } from '@reduxjs/toolkit';
 
 const LoginSchema = Yup.object().shape({
     password: Yup.string()
@@ -22,6 +24,10 @@ const LoginSchema = Yup.object().shape({
 });
 
 const Login = ({ navigation }: AuthNavigationProps<'Login'>) => {
+    const error: any = useAppSelector(
+        ({ authorization }) => authorization.error
+    );
+    const dispatch = useAppDispatch();
     const {
         handleChange,
         handleBlur,
@@ -33,13 +39,18 @@ const Login = ({ navigation }: AuthNavigationProps<'Login'>) => {
     } = useFormik({
         validationSchema: LoginSchema,
         initialValues: { email: '', password: '', remember: true },
-        onSubmit: () =>
-            navigation.dispatch(
-                CommonActions.reset({
-                    index: 0,
-                    routes: [{ name: 'Home' }],
-                })
-            ),
+        onSubmit: ({ email, password }) => {
+            dispatch<any>(signInWithEmailAndPassword({ email, password }))
+                .then(unwrapResult)
+                .then(() => {
+                    navigation.dispatch(
+                        CommonActions.reset({
+                            index: 0,
+                            routes: [{ name: 'Home' }],
+                        })
+                    );
+                });
+        },
     });
     const password = useRef<RNTextInput>(null);
     const footer = (
@@ -109,6 +120,12 @@ const Login = ({ navigation }: AuthNavigationProps<'Login'>) => {
                         </Text>
                     </BorderlessButton>
                 </Box>
+                {error.message && (
+                    <Box marginVertical="s">
+                        <Text color="danger">{error.message}</Text>
+                    </Box>
+                )}
+
                 <Box alignItems="center" marginTop="m">
                     <Button
                         variant="primary"

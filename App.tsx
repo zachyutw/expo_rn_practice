@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import * as eva from '@eva-design/eva';
 import { Provider } from 'react-redux';
@@ -8,23 +8,58 @@ import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import * as SplashScreen from 'expo-splash-screen';
 import LoadAssets from './components/AppLoading/LoadAssets';
 import useCachedResources from './hooks/useCachedResources';
-import useColorScheme from './hooks/useColorScheme';
 import Navigation from './navigation';
-import configureStore from './redux/configureStore';
+import store from './redux/store';
 import { ThemeProvider } from './styles/Theme';
 import { theme } from './styles/custom-theme';
 import fonts from './styles/fonts';
+import * as firebase from 'firebase';
+import 'firebase/firestore';
+import 'firebase/database';
+import 'firebase/auth';
+import Constants from 'expo-constants';
+
+console.log(Constants.manifest.extra, 'extra env variables ');
+
+const firebaseConfig = {
+    apiKey: 'AIzaSyDb87VsqUSRNO6u4sifvblOCuvQvId9HOU',
+    authDomain: 'expo-rn-practice.firebaseapp.com',
+    databaseURL: 'https://expo-rn-practice.firebaseio.com',
+    projectId: 'expo-rn-practice',
+    storageBucket: 'expo-rn-practice.appspot.com',
+    messagingSenderId: '61526535292',
+    appId: '1:61526535292:web:11b72147fb7994722fadf9',
+    measurementId: 'G-TRYY0WNWEY',
+};
+
+if (!firebase.apps.length) {
+    try {
+        firebase.initializeApp(firebaseConfig);
+    } catch (err) {
+        // firebase.initializeApp(firebaseConfig);
+        console.log(err);
+    }
+}
+
+SplashScreen.preventAutoHideAsync().catch(() => {});
 
 function App() {
+    const [initializing, setInitializing] = useState(true);
     const isLoadingComplete = useCachedResources();
-    const colorScheme = useColorScheme();
-    const { store } = configureStore();
 
     useEffect(() => {
-        SplashScreen.preventAutoHideAsync();
+        async function init() {
+            try {
+                setInitializing(false);
+                await SplashScreen.hideAsync();
+            } catch (err) {
+                // do nothing on error
+            }
+        }
+        init();
     }, []);
 
-    if (!isLoadingComplete) {
+    if (!isLoadingComplete || initializing || !firebase.apps.length) {
         return null;
     } else {
         return (
@@ -34,7 +69,7 @@ function App() {
                         <IconRegistry icons={EvaIconsPack} />
                         <Provider store={store}>
                             <ApplicationProvider {...eva} theme={theme}>
-                                <Navigation colorScheme={colorScheme} />
+                                <Navigation />
                                 <StatusBar />
                             </ApplicationProvider>
                         </Provider>

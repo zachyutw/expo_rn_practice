@@ -14,8 +14,5 @@ exec(
             console.log(err);
             return;
         }
-        console.log(stout);
-        console.log(stderr);
     }
 );
-console.log(config.name);

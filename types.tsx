@@ -18,3 +18,11 @@ export type TabOneParamList = {
 export type TabTwoParamList = {
     TabTwoScreen: undefined;
 };
+
+export type DefaultRootState = {
+    authorization: {
+        credit: any;
+        loading: string;
+        error: any;
+    };
+};

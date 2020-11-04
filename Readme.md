@@ -2,6 +2,36 @@
 
 Use Expo Rn to build a dating App that allows users to interact with each other
 
+## Project Target
+
+### react
+
+1. construct a new archive management structure
+
+### expo
+
+1. use expo version 39.0
+2. integrate with constants, file systems,
+3. integrate with others
+
+### typescript
+
+1. learn how use to typescript
+2. try to resolve every typescript error
+
+### redux
+
+1. learn @reduxjs/toolkit
+2. resolve react-redux typescript issues
+3. resolve @reduxjs/toolkit typescript issues
+4. build async thunk action with axios and firebase
+5.
+
+### firebase
+
+1. build authorization system
+2. integrate with @reduxjs/toolkit and react-native
+
 ## Getting Started
 
 ```
@@ -72,6 +102,7 @@ Add additional notes about how to deploy this on a live system
 -   [lottie]()
 -   [react-hook-form](https://react-hook-form.com/)
 -   [storybook](https://medium.com/dooboolab/setup-storybook-with-react-native-typescript-project-774eea7a7719)
+-   [dotenv]()
 
 ## App Pages
 
@@ -96,3 +127,9 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 -   Hat tip to anyone whose code was used
 -   Inspiration
 -   etc
+
+## Unsolved
+
+1. Error: Native splash screen is already hidden. Call this method before rendering any view.
+
+related issue: [[expo-splash-screen] `SplashScreen.preventAutoHideAsync()` no longer works in iOS #9286](https://github.com/expo/expo/issues/9286)

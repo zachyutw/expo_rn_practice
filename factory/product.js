@@ -41,7 +41,7 @@ class MockProduct {
     }
 }
 
-console.log(venders);
+// console.log(venders);
 
 const ws = fs.createWriteStream('./assets/data/products.json');
 rs.pipe(ws);

@@ -8,26 +8,35 @@ import {
 } from '@shopify/restyle';
 
 export const palette = {
-    green: '#2CB9B0',
+    green: '#134C5E',
     white: 'white',
-    orange: '#FE5E33',
-    yellow: '#FFC641',
+    orange: '#FF7449',
+    yellow: '#FCE220',
     pink: '#FF87A2',
     violet: '#442CB9',
     lightBlue: '#BFEAF5',
+    success: '#0A5B4C',
+    blue: '#1E5BC6',
+    text: '#5799ED',
+    blue100: '#D2EEFE',
+    black: 'rgb(0,0,0)',
+    red: '#FD0202',
+    darkBlue: '#002554',
 };
 
 const theme = {
     colors: {
-        primary: palette.green,
+        primary: palette.blue,
         primaryLight: '#E7F9F7',
-        secondary: '#0C0D34',
-        danger: '#FF0058',
+        secondary: palette.darkBlue,
+        danger: palette.red,
         info: '#808080',
-        text: 'rgba(12, 13, 52, 0.7)',
+        text: palette.black,
         textContrast: palette.white,
         background: palette.white,
         background2: '#F4F0EF',
+        background3: palette.blue,
+        background4: palette.blue100,
         graph1: palette.orange,
         graph2: palette.yellow,
         drawer1: palette.orange,
@@ -47,6 +56,7 @@ const theme = {
         l: 25,
         xl: 75,
     },
+
     textVariants: {
         hero: {
             fontSize: 80,
@@ -88,6 +98,12 @@ const theme = {
             lineHeight: 24,
             fontFamily: 'SFProDisplay-Semibold',
             color: 'secondary',
+        },
+        danger: {
+            fontSize: 12,
+            lineHeight: 24,
+            fontFamily: 'SFProDisplay-Semibold',
+            color: 'danger',
         },
     },
     breakpoints: {

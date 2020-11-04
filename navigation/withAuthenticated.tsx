@@ -1,8 +1,8 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '../redux/store';
 
 const withAuthenticated = (Component: any) => (props: any) => {
-    const isAuthenticated = useSelector(() => true);
+    const isAuthenticated = useAppSelector(({ user }) => user.data.email);
     return isAuthenticated ? <Component {...props} /> : null;
 };
 

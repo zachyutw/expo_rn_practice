@@ -8,7 +8,13 @@ import Button from '../../components/Button/Button';
 import { AuthNavigationProps } from './index';
 import TextInput from '../../components/Form/TextInput';
 
+import { createUserByEmailPassword } from '../../redux/slices/authorizationSlice';
+import { CommonActions } from '@react-navigation/native';
+import * as Facebook from 'expo-facebook';
+import * as GoogleSignIn from 'expo-google-sign-in';
 import Footer from './components/Footer';
+import { useAppDispatch, useAppSelector } from '../../redux/store';
+import { unwrapResult } from '@reduxjs/toolkit';
 
 const SignUpSchema = Yup.object().shape({
     password: Yup.string()
@@ -22,6 +28,10 @@ const SignUpSchema = Yup.object().shape({
 });
 
 const SignUp = ({ navigation }: AuthNavigationProps<'SignUp'>) => {
+    const dispatch = useAppDispatch();
+    const error: any = useAppSelector(
+        ({ authorization }) => authorization.error
+    );
     const {
         handleChange,
         handleBlur,
@@ -31,12 +41,26 @@ const SignUp = ({ navigation }: AuthNavigationProps<'SignUp'>) => {
     } = useFormik({
         validationSchema: SignUpSchema,
         initialValues: {
-            email: '',
-            password: '',
-            passwordConfirmation: '',
+            email: 'rntest001@test.com',
+            password: 'Qwer1234',
+            passwordConfirmation: 'Qwer1234',
             remember: true,
         },
-        onSubmit: (values) => console.log(values),
+        onSubmit: ({ email, password }) => {
+            // actions({email,password});
+            console.log('signUp');
+
+            dispatch<any>(createUserByEmailPassword({ email, password }))
+                .then(unwrapResult)
+                .then(() => {
+                    navigation.dispatch(
+                        CommonActions.reset({
+                            index: 0,
+                            routes: [{ name: 'Home' }],
+                        })
+                    );
+                });
+        },
     });
     const password = useRef<RNTextInput>(null);
     const passwordConfirmation = useRef<RNTextInput>(null);
@@ -109,6 +133,11 @@ const SignUp = ({ navigation }: AuthNavigationProps<'SignUp'>) => {
                         secureTextEntry
                     />
                 </Box>
+                {error.message && (
+                    <Box marginVertical="s">
+                        <Text color="danger">{error.message}</Text>
+                    </Box>
+                )}
                 <Box alignItems="center" marginTop="m">
                     <Button
                         variant="primary"

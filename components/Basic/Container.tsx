@@ -32,9 +32,9 @@ const Container = ({ children, footer, pattern }: ContainerProps) => {
                     wHeight +
                     (Platform.OS === 'android' ? Constants.statusBarHeight : 0)
                 }
-                backgroundColor="secondary"
+                backgroundColor="primary"
             >
-                <Box backgroundColor="background">
+                {/* <Box backgroundColor="background">
                     <Box
                         borderBottomLeftRadius="xl"
                         overflow="hidden"
@@ -49,7 +49,7 @@ const Container = ({ children, footer, pattern }: ContainerProps) => {
                             }}
                         />
                     </Box>
-                </Box>
+                </Box> */}
                 <Box flex={1} overflow="hidden">
                     <Image
                         source={asset}
@@ -61,16 +61,17 @@ const Container = ({ children, footer, pattern }: ContainerProps) => {
                         }}
                     />
                     <Box
-                        borderRadius="xl"
+                        borderRadius="l"
                         backgroundColor="background"
                         flex={1}
                         justifyContent="center"
                         padding="xl"
+                        marginHorizontal="m"
                     >
                         {children}
                     </Box>
                 </Box>
-                <Box backgroundColor="secondary" paddingTop="m">
+                <Box backgroundColor="primary" paddingTop="m">
                     {footer}
                     <Box height={insets.bottom} />
                 </Box>

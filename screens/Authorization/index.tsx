@@ -5,17 +5,12 @@ import {
     StackNavigationProp,
 } from '@react-navigation/stack';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
-
-// import Onboarding, { assets as onBoardingAssets } from "./Onboarding";
-import Welcome, { assets as welcomeAssets } from './Welcome';
+import Welcome from './Welcome';
 import Login from './Login';
 import SignUp from './SignUp';
-// import ForgotPassword from "./ForgotPassword";
-// import PasswordChanged from "./PasswordChanged";
-export const assets = [...welcomeAssets];
+export const assets = [];
 
 export type AuthenticationRoutes = {
-    Onboarding: undefined;
     Welcome: undefined;
     Login: undefined;
     SignUp: undefined;
@@ -28,18 +23,6 @@ export type AppRoutes = {
     Home: undefined;
 };
 
-export type HomeRoutes = {
-    OutfitIdeas: undefined;
-    FavoriteOutfits: undefined;
-    TransactionHistory: undefined;
-    EditProfile: undefined;
-};
-
-export interface HomeNavigationProps<RouteName extends keyof HomeRoutes> {
-    navigation: DrawerNavigationProp<HomeRoutes, RouteName>;
-    route: RouteProp<HomeRoutes, RouteName>;
-}
-
 export interface AuthNavigationProps<
     RouteName extends keyof AuthenticationRoutes
 > {
@@ -51,21 +34,13 @@ export interface AuthNavigationProps<
 }
 
 const AuthenticationStack = createStackNavigator<AuthenticationRoutes>();
+// todo ForgotPassword, PasswordChanged
 const AuthenticationNavigator = () => {
     return (
         <AuthenticationStack.Navigator headerMode="none">
-            {/* <AuthenticationStack.Screen name="Onboarding" component={Onboarding} /> */}
             <AuthenticationStack.Screen name="Welcome" component={Welcome} />
             <AuthenticationStack.Screen name="Login" component={Login} />
             <AuthenticationStack.Screen name="SignUp" component={SignUp} />
-            {/* <AuthenticationStack.Screen
-        name="ForgotPassword"
-        component={ForgotPassword}
-      /> */}
-            {/* <AuthenticationStack.Screen
-        name="PasswordChanged"
-        component={PasswordChanged}
-      /> */}
         </AuthenticationStack.Navigator>
     );
 };

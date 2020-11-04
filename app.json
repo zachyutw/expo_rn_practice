@@ -1,36 +1,31 @@
 {
-  "expo": {
-    "name": "expo_rn_dating",
-    "slug": "expo_rn_dating",
-    "version": "1.0.0",
-    "orientation": "default",
-    "icon": "./assets/images/icon.png",
-    "scheme": "myapp",
-    "userInterfaceStyle": "automatic",
-    "splash": {
-      "image": "./assets/images/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
-    "updates": {
-      "fallbackToCacheTimeout": 0
-    },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "zytwrn2020v1"
-    },
-    "web": {
-      "favicon": "./assets/images/favicon.png"
-    },
-    "description": "",
-    "extra": {
-      "STORYBOOK_START": true
-    },
-    "android": {
-      "package": "com.zachyutw.expo_rn_dating"
+    "expo": {
+        "name": "expo-rn-practice",
+        "slug": "expo-rn-practice",
+        "version": "1.0.0",
+        "orientation": "default",
+        "icon": "./assets/images/icon.png",
+        "scheme": "expo-rn-practice",
+        "userInterfaceStyle": "automatic",
+        "splash": {
+            "image": "./assets/images/splash.png",
+            "resizeMode": "contain",
+            "backgroundColor": "#ffffff"
+        },
+        "updates": {
+            "fallbackToCacheTimeout": 0
+        },
+        "assetBundlePatterns": ["**/*"],
+        "ios": {
+            "supportsTablet": true,
+            "bundleIdentifier": "zytwrn2020v1"
+        },
+        "web": {
+            "favicon": "./assets/images/favicon.png"
+        },
+        "description": "",
+        "android": {
+            "package": "com.zachyutw.expo-rn-practice"
+        }
     }
-  }
 }

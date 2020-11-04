@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import productsApi from '../../apis/productsApi';
 
 // First, create the thunk
-export const fetchProducts = createAsyncThunk(
+export const fetchProductsThunk = createAsyncThunk(
     'products/fetchProducts',
     async (params: any, thunkAPI) => {
         try {
@@ -23,15 +23,15 @@ const productSlice = createSlice({
     },
     extraReducers: {
         // Add reducers for additional action types here, and handle loading state as needed
-        [fetchProducts.fulfilled]: (state, action) => {
+        [`${fetchProductsThunk.fulfilled}`]: (state, action) => {
             // Add user to the state array
             state.entities = action.payload;
             state.loading = 'fulfilled';
         },
-        [fetchProducts.pending]: (state) => {
+        [`${fetchProductsThunk.pending}`]: (state) => {
             state.loading = 'pending';
         },
-        [fetchProducts.rejected]: (state) => {
+        [`${fetchProductsThunk.rejected}`]: (state) => {
             state.loading = 'rejected';
         },
     },

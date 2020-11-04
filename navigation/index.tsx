@@ -6,6 +6,7 @@ import BottomTabNavigator from './BottomTabNavigator';
 import LinkingConfiguration from './LinkingConfiguration';
 import StartScreen from '../screens/StartScreen';
 import AuthorizationScreen from '../screens/Authorization';
+import HomeScreen from '../screens/Home';
 
 // If you are not familiar with React Navigation, we recommend going through the
 // "Fundamentals" guide: https://reactnavigation.org/docs/getting-started
@@ -20,7 +21,7 @@ export default function Navigation() {
                 name="Authorization"
                 component={AuthorizationScreen}
             />
-            <Stack.Screen name="Home" component={StartScreen} />
+            <Stack.Screen name="Home" component={HomeScreen} />
 
             <Stack.Screen name="Root" component={BottomTabNavigator} />
             <Stack.Screen

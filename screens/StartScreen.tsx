@@ -5,8 +5,8 @@ import LottieBackground from '../components/Background/LottieBackground';
 import UserCoverCard from '../components/User/UserCoverCard';
 import getProducts from '../apis/productsApi';
 import { increment, decrement } from '../redux/slices/counterSlice';
-import { fetchProducts } from '../redux/slices/productSlice';
-import { useSelector, useDispatch } from 'react-redux';
+import { fetchProductsThunk } from '../redux/slices/productSlice';
+import { useAppDispatch, useAppSelector } from '../redux/store';
 
 const styles = StyleSheet.create({
     screen: {
@@ -46,13 +46,18 @@ const { GET_STARTED } = start;
 export default function StartScreen({ navigation }: any) {
     // const {} = useDeviceOrientation();
     const theme = useTheme();
-    const dispatch = useDispatch();
-    const counter = useSelector(({ counter }) => counter);
-    const productState = useSelector(({ product }) => product);
+    const dispatch = useAppDispatch();
+    const counter = useAppSelector(({ counter }) => counter);
+    const productState = useAppSelector(({ product }) => product);
+    const authorizationState = useAppSelector(
+        ({ authorization }) => authorization
+    );
     useEffect(() => {
-        dispatch(fetchProducts());
+        dispatch<any>(fetchProductsThunk({}));
     }, [counter]);
-    console.log(productState);
+
+    console.log(authorizationState);
+
     return (
         <Layout
             style={[

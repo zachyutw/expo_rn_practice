@@ -19,7 +19,7 @@ const Footer = ({ onPress, title, action }: FooterProps) => {
                 <BorderlessButton {...{ onPress }}>
                     <Text variant="button" color="background">
                         <Text>{`${title} `}</Text>
-                        <Text color="primary">{action}</Text>
+                        <Text color="secondary">{action}</Text>
                     </Text>
                 </BorderlessButton>
             </Box>
