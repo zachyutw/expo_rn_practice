@@ -5,12 +5,6 @@ import { DrawerNavigationProp } from '@react-navigation/drawer';
 import DrawerContent, { DRAWER_WIDTH } from './components/DrawerContent';
 import EditProfile from './EditProfile';
 
-export const assets = [
-    {
-        uri: 'https://loremflickr.com/1000/1000/model',
-    },
-];
-
 export type AppRoutes = {
     Authentication: undefined;
     Home: undefined;

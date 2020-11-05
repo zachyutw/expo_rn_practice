@@ -6,30 +6,27 @@ import {
 import { Platform } from 'react-native';
 import firebase from 'firebase';
 import { v4 } from 'uuid';
-import 'firebase/firestore';
-import 'firebase/database';
+// import 'firebase/firestore';
+// import 'firebase/database';
+// import 'firebase/auth';
 // First, create the thunk
-import uuid from 'uuid-random';
-const getUserInfoIn = (user) => {
-    try {
-        return { ...user, ...JSON.parse(user.displayName) };
-    } catch (err) {
-        console.log(err);
-        return { ...user };
-    }
-};
+
+// const getUserInfoIn = (user) => {
+//     try {
+//         return { ...user, ...JSON.parse(user.displayName) };
+//     } catch (err) {
+//         console.log(err);
+//         return { ...user };
+//     }
+// };
 
 export const fetchCurrentUser = createAsyncThunk(
     'user/fetchCurrentUser',
     async () => {
         try {
             const user = await firebase.auth().currentUser;
-            if (user) {
-                // console.log(user);
-                return getUserInfoIn(user);
-            } else {
-                throw new Error(' No user is signed in');
-            }
+
+            return user;
         } catch (err) {
             throw err;
         }
@@ -39,29 +36,16 @@ export const fetchCurrentUser = createAsyncThunk(
 export const updateProfile = createAsyncThunk(
     'user/updateProfile',
     async (userInfo) => {
-        const currentUser = await firebase.auth().currentUser;
+        let currentUser = await firebase.auth().currentUser;
         try {
-            // console.log(currentUser);
-            let resp = {};
-            firebase.auth().onAuthStateChanged(async (user) => {
-                if (user) {
-                    await user
-                        .updateProfile({ displayName: '123' })
-                        .then(async () => {
-                            console.log(
-                                await firebase.auth().currentUser.displayName
-                            );
-                        });
-                }
-            });
-            // await firebase
-            //     .firestore()
-            //     .collection('users')
-            //     .doc('one')
-            //     .set({ authId: user?.uid, ...userInfo })
-            //     .then(() => console.log('success'));
-
-            return resp;
+            console.log(userInfo);
+            currentUser = await currentUser
+                .updateProfile(userInfo)
+                .then(async () => {
+                    return await firebase.auth().currentUser;
+                });
+            console.log(currentUser.displayName);
+            return currentUser;
             // return {};
         } catch (err) {
             // console.log(user);
@@ -143,18 +127,16 @@ const userSlice = createSlice({
         },
         [`${updateProfile.fulfilled}`]: (state, action) => {
             // Add user to the state array
-            console.log('fulfilled');
             state.data = action.payload;
+            console.log(action.type);
             state.loading = 'fulfilled';
         },
         [`${updateProfile.pending}`]: (state) => {
             state.loading = 'pending';
-            console.log('pending');
             state.error = {};
         },
         [`${updateProfile.rejected}`]: (state, action) => {
             state.loading = 'rejected';
-            console.log('12rejected3');
             state.error = action.error;
         },
         // [`${updateAvatar.fulfilled}`]: (state, action) => {

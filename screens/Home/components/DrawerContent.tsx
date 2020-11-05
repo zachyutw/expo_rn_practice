@@ -50,19 +50,21 @@ const items: DrawerItemProps[] = [
     {
         icon: 'log-out',
         label: 'Logout',
-        onPress: (navigation, dispatch) => {
+        onPress: async (navigation, dispatch) => {
             firebase
                 .auth()
                 .signOut()
                 .then(() => {
-                    console.log('logout success');
+                    console.log('success');
+
                     navigation.dispatch(
                         CommonActions.reset({
                             index: 0,
                             routes: [{ name: 'Authorization' }],
                         })
                     );
-                });
+                })
+                .catch((err) => console.log(err));
         },
         color: 'secondary',
     },

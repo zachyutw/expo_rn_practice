@@ -13,33 +13,10 @@ import store from './redux/store';
 import { ThemeProvider } from './styles/Theme';
 import { theme } from './styles/custom-theme';
 import fonts from './styles/fonts';
-import * as firebase from 'firebase';
-import 'firebase/firestore';
-import 'firebase/database';
-import 'firebase/auth';
+
 import Constants from 'expo-constants';
 
 console.log(Constants.manifest.extra, 'extra env variables ');
-
-const firebaseConfig = {
-    apiKey: 'AIzaSyDb87VsqUSRNO6u4sifvblOCuvQvId9HOU',
-    authDomain: 'expo-rn-practice.firebaseapp.com',
-    databaseURL: 'https://expo-rn-practice.firebaseio.com',
-    projectId: 'expo-rn-practice',
-    storageBucket: 'expo-rn-practice.appspot.com',
-    messagingSenderId: '61526535292',
-    appId: '1:61526535292:web:11b72147fb7994722fadf9',
-    measurementId: 'G-TRYY0WNWEY',
-};
-
-if (!firebase.apps.length) {
-    try {
-        firebase.initializeApp(firebaseConfig);
-    } catch (err) {
-        // firebase.initializeApp(firebaseConfig);
-        console.log(err);
-    }
-}
 
 SplashScreen.preventAutoHideAsync().catch(() => {});
 
@@ -59,7 +36,7 @@ function App() {
         init();
     }, []);
 
-    if (!isLoadingComplete || initializing || !firebase.apps.length) {
+    if (!isLoadingComplete || initializing) {
         return null;
     } else {
         return (

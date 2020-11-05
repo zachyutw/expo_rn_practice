@@ -4,7 +4,7 @@ import {
     SerializedError,
 } from '@reduxjs/toolkit';
 import firebase from 'firebase';
-import 'firebase/firestore';
+// import 'firebase/firestore';
 
 // First, create the thunk
 
@@ -39,7 +39,14 @@ export const signInWithEmailAndPassword = createAsyncThunk(
 
             return await firebase
                 .auth()
-                .signInWithEmailAndPassword(email, password);
+                .signInWithEmailAndPassword(email, password)
+                .then(() => {
+                    firebase.auth().onAuthStateChanged((user) => {
+                        if (user) {
+                            user.updateProfile({ displayName: 'test001' });
+                        }
+                    });
+                });
         } catch (err) {
             throw err;
         }

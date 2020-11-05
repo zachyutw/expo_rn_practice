@@ -9,7 +9,7 @@ import Header from './components/Header';
 import { fetchCurrentUser } from '../../redux/slices/userSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import PersonalInfo from './components/PersonalInfo';
-import firebase from 'firebase';
+// import firebase from 'firebase';
 const { width } = Dimensions.get('window');
 
 const assets = [
@@ -33,7 +33,7 @@ const EditProfile = ({ navigation }: HomeNavigationProps<'EditProfile'>) => {
     //     displayName: null,
     // });
     const dispatch = useAppDispatch();
-    const user = useAppSelector(({ user }) => user.data);
+    const user = useAppSelector(({ user }) => ({ ...user.data }));
     const { email, photoURL, emailVerified, displayName } = user;
     useEffect(() => {
         dispatch<any>(fetchCurrentUser());
