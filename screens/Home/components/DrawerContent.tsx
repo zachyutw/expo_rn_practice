@@ -11,8 +11,9 @@ import { useTheme } from '../../../styles/Theme';
 import Header from './Header';
 import DrawerItem, { DrawerItemProps } from './DrawerItem';
 import { useAppDispatch, useAppSelector } from '../../../redux/store';
+import { unwrapResult } from '@reduxjs/toolkit';
 import * as ImagePicker from 'expo-image-picker';
-import firebase from 'firebase';
+import { signOut } from '../../../redux/slices/authorizationSlice';
 export const assets = [
     {
         uri: 'https://loremflickr.com/1000/1000/model',
@@ -24,49 +25,60 @@ const aspectRatio = 750 / 1125;
 const height = DRAWER_WIDTH * aspectRatio;
 const items: DrawerItemProps[] = [
     {
+        id: 'favorites',
         icon: 'heart',
         label: 'Favorites',
         screen: 'FavoriteOutfits',
         color: 'drawer1',
     },
     {
+        id: 'editProfile',
         icon: 'user',
         label: 'Edit Profile',
         screen: 'EditProfile',
         color: 'drawer2',
     },
     {
+        id: 'transactionHistory',
         icon: 'clock',
         label: 'Transaction History',
         screen: 'TransactionHistory',
         color: 'drawer3',
     },
     {
+        id: 'notificationSettings',
         icon: 'settings',
         label: 'Notifications Settings',
         screen: 'FavoriteOutfits',
         color: 'drawer4',
     },
     {
+        id: 'logout',
         icon: 'log-out',
         label: 'Logout',
-        onPress: async (navigation, dispatch) => {
-            firebase
-                .auth()
-                .signOut()
-                .then(() => {
-                    console.log('success');
-
-                    navigation.dispatch(
-                        CommonActions.reset({
-                            index: 0,
-                            routes: [{ name: 'Authorization' }],
-                        })
-                    );
-                })
-                .catch((err) => console.log(err));
-        },
         color: 'secondary',
+        onPress: (navigation, dispatch) => {
+            navigation.dispatch(
+                CommonActions.reset({
+                    index: 0,
+                    routes: [{ name: 'Authorization' }],
+                })
+            );
+
+            // TODO firebase signOut error
+            // dispatch<any>(signOut())
+            //     .then(unwrapResult)
+            //     .then(() => {
+            //         console.log('log out');
+            //         navigation.dispatch(
+            //             CommonActions.reset({
+            //                 index: 0,
+            //                 routes: [{ name: 'Authorization' }],
+            //             })
+            //         );
+            //     })
+            //     .catch((err) => console.log(err));
+        },
     },
 ];
 
@@ -75,6 +87,7 @@ const DrawerContent = () => {
     const theme = useTheme();
     const user = useAppSelector(({ user }) => user.data);
     const { email, photoURL, emailVerified, displayName } = user;
+
     return (
         <Box flex={1}>
             <Box flex={0.2} backgroundColor="background">

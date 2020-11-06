@@ -16,6 +16,38 @@ import fonts from './styles/fonts';
 
 import Constants from 'expo-constants';
 
+import * as firebase from 'firebase';
+import 'firebase/firestore';
+import 'firebase/database';
+import 'firebase/auth';
+
+let app;
+
+const firebaseConfig = {
+    apiKey: 'AIzaSyBA9nJM9wFmKMSEK_n4DFS8zfbGXHhsZZQ',
+    authDomain: 'zy-dev-proejct.firebaseapp.com',
+    databaseURL: 'https://zy-dev-proejct.firebaseio.com',
+    projectId: 'zy-dev-proejct',
+    storageBucket: 'zy-dev-proejct.appspot.com',
+    messagingSenderId: '703388529345',
+    appId: '1:703388529345:web:973498fce4c0b25f239a40',
+    measurementId: 'G-HBB6S4XJ2W',
+};
+
+if (!firebase.apps.length) {
+    try {
+        firebase.initializeApp(firebaseConfig);
+    } catch (err) {
+        // firebase.initializeApp(firebaseConfig);
+
+        firebase.app().delete();
+        console.log(err);
+        // firebase.initializeApp(firebaseConfig);
+    }
+} else {
+    firebase.app();
+}
+
 console.log(Constants.manifest.extra, 'extra env variables ');
 
 SplashScreen.preventAutoHideAsync().catch(() => {});

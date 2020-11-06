@@ -22,6 +22,7 @@ export const palette = {
     black: 'rgb(0,0,0)',
     red: '#FD0202',
     darkBlue: '#002554',
+    transparentBlue100: 'rgba(32, 128, 247, 0.08)',
 };
 
 const theme = {
@@ -37,6 +38,7 @@ const theme = {
         background2: '#F4F0EF',
         background3: palette.blue,
         background4: palette.blue100,
+        backgroundSpinner: palette.transparentBlue100,
         graph1: palette.orange,
         graph2: palette.yellow,
         drawer1: palette.orange,

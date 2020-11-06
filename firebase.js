@@ -22,7 +22,7 @@ if (!firebase.apps.length) {
     } catch (err) {
         // firebase.initializeApp(firebaseConfig);
         console.log(err);
-        app = firebase.app().delete();
+        // app = firebase.app().delete();
     }
 } else {
     app = firebase.app();

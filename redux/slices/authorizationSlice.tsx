@@ -35,23 +35,23 @@ export const signInWithEmailAndPassword = createAsyncThunk(
     'authorization/signInWithEmailAndPassword',
     async ({ email, password }: any) => {
         try {
-            await firebase.auth();
-
             return await firebase
                 .auth()
-                .signInWithEmailAndPassword(email, password)
-                .then(() => {
-                    firebase.auth().onAuthStateChanged((user) => {
-                        if (user) {
-                            user.updateProfile({ displayName: 'test001' });
-                        }
-                    });
-                });
+                .signInWithEmailAndPassword(email, password);
         } catch (err) {
             throw err;
         }
     }
 );
+
+export const signOut = createAsyncThunk('authorization/signOut', async () => {
+    try {
+        await firebase.auth().signOut();
+        return {};
+    } catch (err) {
+        throw err;
+    }
+});
 
 interface authorizationState {
     loading: string;
@@ -99,6 +99,11 @@ const authorizationSlice = createSlice({
         [`${signInWithEmailAndPassword.rejected}`]: (state, action) => {
             state.loading = 'rejected';
             state.error = action.error;
+        },
+        [`${signOut.fulfilled}`]: (state) => {
+            // Add user to the state array
+            state.credit = {};
+            state.loading = 'fulfilled';
         },
     },
 });

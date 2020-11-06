@@ -5,27 +5,62 @@ import {
 } from '@reduxjs/toolkit';
 import { Platform } from 'react-native';
 import firebase from 'firebase';
-import { v4 } from 'uuid';
+import uuid from 'uuid-random';
 // import 'firebase/firestore';
 // import 'firebase/database';
-// import 'firebase/auth';
+import 'firebase/auth';
 // First, create the thunk
 
-// const getUserInfoIn = (user) => {
-//     try {
-//         return { ...user, ...JSON.parse(user.displayName) };
-//     } catch (err) {
-//         console.log(err);
-//         return { ...user };
-//     }
-// };
+const readData = (uid: string, collectionName: string) => {
+    return firebase
+        .database()
+        .ref(`/${collectionName}/` + uid)
+        .once('value')
+        .then((snapshot) => snapshot.val() || {});
+};
+
+const writeData = async (uid: string, collectionName: string, data) => {
+    await firebase
+        .database()
+        .ref(`${collectionName}/` + uid)
+        .set(data);
+    return { message: 'success' };
+};
+
+const updateUserData = async (profile: any) => {
+    const userData = await getCurrentUserData();
+    await writeData(userData.uid, 'users', { ...userData, ...profile });
+    return { ...userData, ...profile };
+};
+
+const getCurrentUser = () =>
+    new Promise((resolve, reject) => {
+        try {
+            firebase.auth().onAuthStateChanged((user) => {
+                if (user) {
+                    resolve(user);
+                }
+            });
+        } catch (err) {
+            reject(err);
+        }
+    });
+const getCurrentUserData = async () => {
+    const {
+        displayName,
+        phoneNumber,
+        photoURL,
+        uid,
+    }: any = await getCurrentUser();
+    const userData = await readData(uid, 'users');
+    return { displayName, phoneNumber, photoURL, id: uid, uid, ...userData };
+};
 
 export const fetchCurrentUser = createAsyncThunk(
     'user/fetchCurrentUser',
     async () => {
         try {
-            const user = await firebase.auth().currentUser;
-
+            const user = await getCurrentUserData();
             return user;
         } catch (err) {
             throw err;
@@ -35,62 +70,48 @@ export const fetchCurrentUser = createAsyncThunk(
 
 export const updateProfile = createAsyncThunk(
     'user/updateProfile',
-    async (userInfo) => {
-        let currentUser = await firebase.auth().currentUser;
+    async (profile: any) => {
         try {
-            console.log(userInfo);
-            currentUser = await currentUser
-                .updateProfile(userInfo)
-                .then(async () => {
-                    return await firebase.auth().currentUser;
-                });
-            console.log(currentUser.displayName);
-            return currentUser;
-            // return {};
+            await updateUserData(profile);
+            const userData = await getCurrentUserData();
+            return { ...userData };
         } catch (err) {
-            // console.log(user);
             console.log(err);
             throw err;
         }
     }
 );
 
-// export const updateAvatar = createAsyncThunk(
-//     'user/updateAvatar',
-//     async (result: any) => {
-//         try {
-//             // upload avatar image to firebase storage
-//             const fileName = `images/${uuid()}.png`;
-//             const storageRef = firebase.storage().ref();
-//             const imageRef = storageRef.child(fileName);
-//             const response = await fetch(result.uri);
-//             const blob = await response.blob();
-//             const downLoadURL = await imageRef
-//                 .put(blob)
-//                 .then(async () => {
-//                     console.log('upload file to success');
-//                     return await imageRef.getDownloadURL();
-//                 })
-//                 .catch((err) => console.log(err));
+const upLoadAvatar = async (result) => {
+    const { uid } = await firebase.auth().currentUser;
+    const fileName = `images/${uid}/avatar.png`;
+    const storageRef = firebase.storage().ref();
+    const imageRef = storageRef.child(fileName);
+    const response = await fetch(result.uri);
+    const blob = await response.blob();
+    const downLoadURL = await imageRef.put(blob).then(async () => {
+        console.log('upload file to success');
+        return await imageRef.getDownloadURL();
+    });
 
-//             // update user avatar
-//             const user = await firebase.auth().currentUser;
-//             if (user) {
-//                 return await user
-//                     .updateProfile({ photoURL: 'test1' })
-//                     .then(async () => {
-//                         const updatedUser = await firebase.auth().currentUser;
-//                         return getUserInfoIn(updatedUser);
-//                     });
-//             } else {
-//                 throw new Error(' No user is signed in');
-//             }
-//         } catch (err) {
-//             console.log(err);
-//             throw err;
-//         }
-//     }
-// );
+    await updateUserData({ photoURL: downLoadURL });
+    return { photoURL: downLoadURL };
+};
+
+export const updateAvatar = createAsyncThunk(
+    'user/updateAvatar',
+    async (result: any) => {
+        try {
+            // upload avatar image to firebase storage
+            await upLoadAvatar(result);
+            const userData = await getCurrentUserData();
+            return { ...userData };
+        } catch (err) {
+            console.log(err);
+            throw err;
+        }
+    }
+);
 
 interface userState {
     loading: string;
@@ -128,7 +149,6 @@ const userSlice = createSlice({
         [`${updateProfile.fulfilled}`]: (state, action) => {
             // Add user to the state array
             state.data = action.payload;
-            console.log(action.type);
             state.loading = 'fulfilled';
         },
         [`${updateProfile.pending}`]: (state) => {
@@ -139,19 +159,21 @@ const userSlice = createSlice({
             state.loading = 'rejected';
             state.error = action.error;
         },
-        // [`${updateAvatar.fulfilled}`]: (state, action) => {
-        //     // Add user to the state array
-        //     state.data = action.payload;
-        //     state.loading = 'fulfilled';
-        // },
-        // [`${updateAvatar.pending}`]: (state) => {
-        //     state.loading = 'pending';
-        //     state.error = {};
-        // },
-        // [`${updateAvatar.rejected}`]: (state, action) => {
-        //     state.loading = 'rejected';
-        //     state.error = action.error;
-        // },
+        [`${updateAvatar.fulfilled}`]: (state, action) => {
+            // Add user to the state array
+            state.data = action.payload;
+            // console.log(action.payload);
+            state.loading = 'fulfilled';
+        },
+        [`${updateAvatar.pending}`]: (state) => {
+            state.loading = 'pending';
+            state.error = {};
+        },
+        [`${updateAvatar.rejected}`]: (state, action) => {
+            state.loading = 'rejected';
+            state.error = action.error;
+            console.log(action.error);
+        },
     },
 });
 

@@ -6,38 +6,20 @@ import { Box, Text } from '../../components/Basic';
 import { useTheme } from '../../styles/Theme';
 import Header from './components/Header';
 
-import { fetchCurrentUser } from '../../redux/slices/userSlice';
+import { fetchCurrentUser, updateAvatar } from '../../redux/slices/userSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import PersonalInfo from './components/PersonalInfo';
+import Spinner from '../../components/AppLoading/Spinner';
+import { HomeNavigationProps } from './navigation';
 // import firebase from 'firebase';
 const { width } = Dimensions.get('window');
 
-const assets = [
-    {
-        uri: 'https://loremflickr.com/1000/1000/model',
-    },
-];
-
-interface HomeNavigationProps<RouteName extends keyof HomeRoutes> {
-    navigation: DrawerNavigationProp<HomeRoutes, RouteName>;
-    route: RouteProp<HomeRoutes, RouteName>;
-}
-
 const EditProfile = ({ navigation }: HomeNavigationProps<'EditProfile'>) => {
     const theme = useTheme();
-    const [image, setImage] = useState('');
-    // const [user, setUser] = useState({
-    //     email: '',
-    //     photoURL: null,
-    //     emailVerified: false,
-    //     displayName: null,
-    // });
     const dispatch = useAppDispatch();
     const user = useAppSelector(({ user }) => ({ ...user.data }));
+    const loading = useAppSelector(({ user }) => user.loading);
     const { email, photoURL, emailVerified, displayName } = user;
-    useEffect(() => {
-        dispatch<any>(fetchCurrentUser());
-    }, []);
 
     useEffect(() => {
         (async () => {
@@ -51,29 +33,20 @@ const EditProfile = ({ navigation }: HomeNavigationProps<'EditProfile'>) => {
                     );
                 }
             }
-
-            // const auth = await firebase.auth();
-
-            // if (auth) {
-            //     auth.sendPasswordResetEmail('zachyu.tw@gmail.com').then(() =>
-            //         console.log('mail sent')
-            //     );
-            // }
         })();
     }, []);
 
     const pickImage = async () => {
-        // let result = await ImagePicker.launchImageLibraryAsync({
-        //     // mediaTypes: ImagePicker.MediaTypeOptions.All,
-        //     allowsEditing: true,
-        //     aspect: [4, 3],
-        //     // quality: 1,
-        // });
-        // // console.log(result);
-        // if (!result.cancelled) {
-        //     // dispatch<any>(updateAvatar(result));
-        //     setImage(result.uri);
-        // }
+        let result: any = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 0.1,
+        });
+
+        if (!result.cancelled) {
+            dispatch<any>(updateAvatar(result));
+        }
     };
     return (
         <Box flex={1} backgroundColor="background">
@@ -111,16 +84,16 @@ const EditProfile = ({ navigation }: HomeNavigationProps<'EditProfile'>) => {
                     alignItems="center"
                     style={{ borderRadius: 50 }}
                 >
-                    {/* <TouchableOpacity onPress={pickImage}>
+                    <TouchableOpacity onPress={pickImage}>
                         <Image
-                            source={assets[0]}
+                            source={{ uri: photoURL }}
                             style={{
                                 width: 90,
                                 height: 90,
                                 borderRadius: theme.borderRadii.xl,
                             }}
                         />
-                    </TouchableOpacity> */}
+                    </TouchableOpacity>
                 </Box>
                 <Box
                     marginVertical="m"
@@ -137,6 +110,7 @@ const EditProfile = ({ navigation }: HomeNavigationProps<'EditProfile'>) => {
             <Box flex={1}>
                 <PersonalInfo />
             </Box>
+            {loading === 'pending' && <Spinner />}
         </Box>
     );
 };

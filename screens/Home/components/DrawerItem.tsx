@@ -4,11 +4,12 @@ import { useNavigation } from '@react-navigation/native';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { Box, Text } from '../../../components/Basic';
 import RoundedIcon from '../../../components/Icon/RoundedIcon';
-import { HomeRoutes } from '../index';
+import { HomeRoutes } from '../navigation';
 import { useTheme, Theme } from '../../../styles/Theme';
-import { useAppDispatch } from '../../../redux/store';
+import { useAppDispatch, AppDispatch } from '../../../redux/store';
 
 interface BaseDrawerItem {
+    id: string;
     icon: string;
     color: keyof Theme['colors'];
     label: string;
@@ -21,7 +22,7 @@ interface ScreenDrawerItem extends BaseDrawerItem {
 interface OnPressDrawerItem extends BaseDrawerItem {
     onPress: (
         navigation: ReturnType<typeof useNavigation>,
-        dispatch: any
+        dispatch: AppDispatch
     ) => void;
 }
 
@@ -29,7 +30,7 @@ export type DrawerItemProps = ScreenDrawerItem | OnPressDrawerItem;
 
 const DrawerItem = ({ icon, color, label, ...props }: DrawerItemProps) => {
     const theme = useTheme();
-    // const dispatch = useAppDispatch();
+    const dispatch = useAppDispatch();
     const navigation = useNavigation<
         DrawerNavigationProp<HomeRoutes, 'OutfitIdeas'>
     >();
@@ -38,7 +39,7 @@ const DrawerItem = ({ icon, color, label, ...props }: DrawerItemProps) => {
             onPress={() =>
                 'screen' in props
                     ? navigation.navigate(props.screen)
-                    : props.onPress(navigation)
+                    : props.onPress(navigation, dispatch)
             }
             style={{ borderRadius: theme.borderRadii.m }}
         >
