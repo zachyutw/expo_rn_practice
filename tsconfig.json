@@ -1,13 +1,15 @@
 {
     "compilerOptions": {
-        "allowSyntheticDefaultImports": false,
+        "allowSyntheticDefaultImports": true,
         "jsx": "react-native",
         "lib": ["dom", "esnext"],
         "moduleResolution": "node",
         "noEmit": true,
+        "module": "es2015",
         "skipLibCheck": true,
         "resolveJsonModule": true,
-        "strict": true,
+        "strict": false,
+        "esModuleInterop": true,
         "rootDirs": ["./", "stories"]
     },
     "include": [
