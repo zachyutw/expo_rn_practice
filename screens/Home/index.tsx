@@ -1,52 +1,79 @@
-import React, { useEffect } from 'react';
-import { RouteProp } from '@react-navigation/native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { DrawerNavigationProp } from '@react-navigation/drawer';
-import DrawerContent, { DRAWER_WIDTH } from './components/DrawerContent';
-import EditProfile from './EditProfile';
-import { unwrapResult } from '@reduxjs/toolkit';
-import { useAppDispatch, useAppSelector } from '../../redux/store';
-import { fetchCurrentUser } from '../../redux/slices/userSlice';
+import React from 'react';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
+import { Ionicons } from '@expo/vector-icons';
+import { Box, Text } from '../../components/Basic';
+import Header from './components/Header';
+import Home from './Home';
+import HomeDetail from './HomeDetail';
+import { HomeRoutes, HomeStackRoutes } from './navigation';
+import UserConfigStack from '../UserConfig';
+const Tab = createBottomTabNavigator<HomeStackRoutes>();
+const Stack = createStackNavigator<HomeRoutes>();
 
-import { useNavigation, CommonActions } from '@react-navigation/native';
-import { HomeRoutes } from './navigation';
+const TabBScreen = () => {
+    return (
+        <Box flex={1} justifyContent="center" alignItems="center">
+            <Box
+                position="absolute"
+                top={0}
+                left={0}
+                right={0}
+                bottom={0}
+                borderBottomRightRadius="xl"
+                backgroundColor="secondary"
+            >
+                <Header
+                    title="Edit Profile"
+                    left={{
+                        icon: 'menu',
+                        onPress: () => {
+                            // navigation.dispatch(DrawerActions.openDrawer()),
+                        },
+                    }}
+                    dark
+                />
+            </Box>
+            <Text variant="title2">Welcome to TabB page!</Text>
+        </Box>
+    );
+};
 
-const HomeDrawerStack = createDrawerNavigator<HomeRoutes>();
+const HomeStack = () => {
+    return (
+        <Stack.Navigator>
+            <Stack.Screen name="Home" component={Home} />
+            <Stack.Screen name="HomeDetail" component={HomeDetail} />
+        </Stack.Navigator>
+    );
+};
 
 const HomeNavigator = () => {
-    const dispatch = useAppDispatch();
-    const navigation = useNavigation();
-    useEffect(() => {
-        dispatch<any>(fetchCurrentUser())
-            .then(unwrapResult)
-            .catch((err) => {
-                if (
-                    err.message ===
-                    `null is not an object (evaluating '_await$firebase$auth$.displayName')`
-                ) {
-                    navigation.dispatch(
-                        CommonActions.reset({
-                            index: 0,
-                            routes: [{ name: 'Authorization' }],
-                        })
-                    );
-                    console.log('no user');
-                } else {
-                    console.log(err);
-                }
-            });
-    }, []);
-
     return (
-        <HomeDrawerStack.Navigator
-            drawerContent={() => <DrawerContent />}
-            drawerStyle={{ width: DRAWER_WIDTH }}
+        <Tab.Navigator
+            screenOptions={({ route }) => ({
+                tabBarIcon: ({ focused, color, size }) => {
+                    let iconName;
+                    if (route.name === 'HomeStack') {
+                        iconName = focused
+                            ? 'ios-information-circle'
+                            : 'ios-information-circle-outline';
+                    } else if (route.name === 'UserConfig') {
+                        iconName = focused ? 'ios-list-box' : 'ios-list';
+                    }
+                    return (
+                        <Ionicons name={iconName} size={size} color={color} />
+                    );
+                },
+            })}
+            tabBarOptions={{
+                activeTintColor: 'tomato',
+                inactiveTintColor: 'grey',
+            }}
         >
-            <HomeDrawerStack.Screen
-                name="EditProfile"
-                component={EditProfile}
-            />
-        </HomeDrawerStack.Navigator>
+            <Tab.Screen name="HomeStack" component={HomeStack} />
+            <Tab.Screen name="UserConfig" component={UserConfigStack} />
+        </Tab.Navigator>
     );
 };
 

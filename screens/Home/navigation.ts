@@ -1,18 +1,17 @@
 import { RouteProp } from '@react-navigation/native';
-import { DrawerNavigationProp } from '@react-navigation/drawer';
+import { StackNavigationProp } from '@react-navigation/stack';
 
-export type AppRoutes = {
-    Authentication: undefined;
-    Home: undefined;
-};
 export type HomeRoutes = {
-    OutfitIdeas: undefined;
-    FavoriteOutfits: undefined;
-    TransactionHistory: undefined;
-    EditProfile: undefined;
+    Home: undefined;
+    HomeDetail: undefined;
+};
+
+export type HomeStackRoutes = {
+    HomeStack: undefined;
+    UserConfig: undefined;
 };
 
 export interface HomeNavigationProps<RouteName extends keyof HomeRoutes> {
-    navigation: DrawerNavigationProp<HomeRoutes, RouteName>;
+    navigation: StackNavigationProp<HomeRoutes, RouteName>;
     route: RouteProp<HomeRoutes, RouteName>;
 }

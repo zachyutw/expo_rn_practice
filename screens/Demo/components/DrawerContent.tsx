@@ -128,7 +128,7 @@ const DrawerContent = () => {
                     justifyContent="center"
                     padding="xl"
                 >
-                    <Box
+                    {/* <Box
                         position="absolute"
                         left={DRAWER_WIDTH / 2 - 50}
                         top={-50}
@@ -148,15 +148,15 @@ const DrawerContent = () => {
                                 borderRadius: theme.borderRadii.xl,
                             }}
                         />
-                    </Box>
-                    <Box marginVertical="m">
+                    </Box> */}
+                    {/* <Box marginVertical="m">
                         <Text variant="title1" color="text" textAlign="center">
                             {displayName || 'Default User'}
                         </Text>
                         <Text variant="body" textAlign="center">
                             {email}
                         </Text>
-                    </Box>
+                    </Box> */}
                     {items.map((item) => (
                         <DrawerItem key={item.icon} {...item} />
                     ))}

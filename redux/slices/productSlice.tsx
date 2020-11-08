@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import productsApi from '../../apis/productsApi';
+import productsApi, { Product } from '../../apis/productsApi';
 
 // First, create the thunk
 export const fetchProductsThunk = createAsyncThunk(
@@ -14,10 +14,17 @@ export const fetchProductsThunk = createAsyncThunk(
     }
 );
 
+type ProductInitialState = {
+    entities: Array<Product>;
+    loading: 'init' | 'fulfilled' | 'pending' | 'rejected';
+};
+
+const initialState = { entities: [], loading: 'init' } as ProductInitialState;
+
 // Then, handle actions in your reducers:
 const productSlice = createSlice({
     name: 'users',
-    initialState: { entities: [], loading: 'init' },
+    initialState,
     reducers: {
         // standard reducer logic, with auto-generated action types per reducer
     },
