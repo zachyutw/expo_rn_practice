@@ -3,6 +3,8 @@ import counter from './slices/counterSlice';
 import product from './slices/productSlice';
 import authorization from './slices/authorizationSlice';
 import user from './slices/userSlice';
+import room from './slices/roomSlice';
+import booking from './slices/bookingSlice';
 const initState = {};
 
 const profile = (state = initState, action: any) => {
@@ -18,4 +20,6 @@ export default combineReducers({
     product,
     authorization,
     user,
+    room,
+    booking,
 });

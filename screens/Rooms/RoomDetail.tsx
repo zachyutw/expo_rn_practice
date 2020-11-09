@@ -1,10 +1,17 @@
 import React from 'react';
-import { Image } from 'react-native';
+import { Image, StyleSheet } from 'react-native';
 import { Box, Text } from '../../components/Basic';
 import { Room } from '../../redux/slices/roomSlice';
 import { SharedElement } from 'react-navigation-shared-element';
 
-const HomeDetail = ({ route }) => {
+const styles = StyleSheet.create({
+    cover: {
+        width: '100%',
+        height: 300,
+    },
+});
+
+const RoomDetail = ({ route }) => {
     const { item } = route.params;
     const { cover, displayName, description, id } = item as Room;
 
@@ -12,10 +19,7 @@ const HomeDetail = ({ route }) => {
         <Box>
             <SharedElement id={id}>
                 <Image
-                    style={{
-                        width: '100%',
-                        height: 300,
-                    }}
+                    style={styles.cover}
                     resizeMode="cover"
                     source={{ uri: cover }}
                 />
@@ -28,4 +32,4 @@ const HomeDetail = ({ route }) => {
     );
 };
 
-export default HomeDetail;
+export default RoomDetail;

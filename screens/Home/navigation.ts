@@ -9,6 +9,7 @@ export type HomeRoutes = {
 export type HomeStackRoutes = {
     HomeStack: undefined;
     UserConfig: undefined;
+    RoomStack: undefined;
 };
 
 export interface HomeNavigationProps<RouteName extends keyof HomeRoutes> {

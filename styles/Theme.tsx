@@ -25,7 +25,7 @@ export const palette = {
     transparentBlue100: 'rgba(32, 128, 247, 0.08)',
 };
 
-const theme = {
+export const theme = {
     colors: {
         primary: palette.blue,
         primaryLight: '#E7F9F7',

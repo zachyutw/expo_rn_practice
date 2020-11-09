@@ -2,7 +2,7 @@ const faker = require('faker');
 const _ = require('lodash');
 const fs = require('fs');
 const FPG = require('fake-product-generator');
-const { v4: uuidv4 } = require('uuid');
+const uuid = require('uuid-random');
 const rs = FPG(5); // creates a million products!
 
 const VENDERS_NUMBER = 3;
@@ -29,7 +29,9 @@ class MockProductDetail {
 
 class MockProduct {
     constructor(props) {
-        this.part_number = uuidv4();
+        const id = uuid();
+        this.id = id;
+        this.part_number = id;
         this.name = faker.name.firstName();
         this.description = faker.company.catchPhraseDescriptor();
         this.supplier = props.supplier;

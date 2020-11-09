@@ -1,0 +1,114 @@
+[
+    {
+        "id": "Bedroom1",
+        "hostedBy": "Little Hill Side",
+        "displayName": "Bedroom1",
+        "imageUrls": [
+            "https://i.imgur.com/OGCGs0Q.jpg",
+            "https://i.imgur.com/easporz.jpg",
+            "https://i.imgur.com/9thHjmZ.jpg"
+        ],
+        "cover": "https://i.imgur.com/OGCGs0Q.jpg",
+        "bed": "1 queen bed",
+        "colors": ["#BCC98F", "#E0E0E0", "#BE9F2D"],
+        "price": "1000",
+        "currency": "NT",
+        "description": "Signature Double Room, A natural and relaxing environment",
+        "people": 2,
+        "floor": 1
+    },
+    {
+        "id": "Bedroom2",
+        "hostedBy": "Little Hill Side",
+        "displayName": "Bedroom2",
+        "imageUrls": [
+            "https://i.imgur.com/GnFAkmQ.jpg",
+            "https://i.imgur.com/BAva2j8.jpg",
+            "https://i.imgur.com/3BJ6ZkB.jpg"
+        ],
+        "cover": "https://i.imgur.com/GnFAkmQ.jpg",
+        "bed": "1 queen bed",
+        "colors": ["#544E3C", "#AA977F", "#A47D43"],
+        "price": "1000",
+        "currency": "NT",
+        "description": "Cure Double Room, Small and comfortable space",
+        "people": 2,
+        "floor": 1
+    },
+    {
+        "id": "Bedroom3",
+        "hostedBy": "Little Hill Side",
+        "displayName": "Bedroom3",
+        "imageUrls": [
+            "https://i.imgur.com/sYMb9gm.jpg",
+            "https://i.imgur.com/jC5zlJq.jpg",
+            "https://i.imgur.com/qSIJRq6.jpg",
+            "https://i.imgur.com/BW9hjEJ.jpg"
+        ],
+        "cover": "https://i.imgur.com/sYMb9gm.jpg",
+        "bed": "2 king beds",
+        "colors": [
+            "#CEA314",
+            "#E0E0E0",
+            "#C8B59F",
+            "#AFAFAF",
+            "#3E2725",
+            "#E73246"
+        ],
+        "price": "2000",
+        "currency": "NT",
+        "description": "Classic big room",
+        "people": 4,
+        "floor": 2
+    },
+    {
+        "id": "Bedroom4",
+        "hostedBy": "Little Hill Side",
+        "displayName": "Bedroom4",
+        "imageUrls": [
+            "https://i.imgur.com/DamkcoY.jpg",
+            "https://i.imgur.com/ysG0A1A.jpg",
+            "https://i.imgur.com/s8r8hRh.jpg",
+            "https://i.imgur.com/xX1sQzB.jpg",
+            "https://i.imgur.com/DxEMGld.jpg"
+        ],
+        "cover": "https://i.imgur.com/DamkcoY.jpg",
+        "bed": "1 queen bed, 1 small double bed",
+        "colors": ["#9AB0A8", "#7E7A64", "#967346", "#1E6E91"],
+        "price": "2000",
+        "currency": "NT",
+        "description": "Parenting room",
+        "people": 4,
+        "floor": 2
+    },
+    {
+        "id": "Bedroom5",
+        "hostedBy": "Little Hill Side",
+        "displayName": "Bedroom5",
+        "imageUrls": [
+            "https://i.imgur.com/8JUnXrg.jpg",
+            "https://i.imgur.com/KHXPAQu.jpg",
+            "https://i.imgur.com/YpcPfR9.jpg",
+            "https://i.imgur.com/CUJrb9p.jpg",
+            "https://i.imgur.com/YYe8ITG.jpg",
+            "https://i.imgur.com/aoemRFi.jpg",
+            "https://i.imgur.com/cf7NQhq.jpg",
+            "https://i.imgur.com/6ARTF9X.jpg"
+        ],
+        "cover": "https://i.imgur.com/8JUnXrg.jpg",
+        "bed": "2 king beds",
+        "colors": [
+            "#865A38",
+            "#BD8D6F",
+            "#62707D",
+            "#D1D4C1",
+            "#424242",
+            "#E2DBCB"
+        ],
+        "price": "2000",
+        "currency": "NT",
+        "description": "Landscape room",
+        "people": 4,
+        "floor": 3
+    }
+]
