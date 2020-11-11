@@ -28,6 +28,9 @@ const Container = ({ children, footer, pattern }: ContainerProps) => {
     return (
         <KeyboardAwareScrollView scrollEnabled={false}>
             <Box
+                flex={1}
+                paddingTop="xl"
+                paddingBottom="m"
                 height={
                     wHeight +
                     (Platform.OS === 'android' ? Constants.statusBarHeight : 0)
@@ -71,7 +74,7 @@ const Container = ({ children, footer, pattern }: ContainerProps) => {
                         {children}
                     </Box>
                 </Box>
-                <Box backgroundColor="primary" paddingTop="m">
+                <Box backgroundColor="primary" padding="m">
                     {footer}
                     <Box height={insets.bottom} />
                 </Box>

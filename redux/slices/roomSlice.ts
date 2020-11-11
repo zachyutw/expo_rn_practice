@@ -1,13 +1,14 @@
 import rooms from '../../assets/data/rooms.json';
+import zhRooms from '../../assets/data/zhTw-rooms.json';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-
+import * as Localization from 'expo-localization';
 function sleep(ms: number) {
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 export type Room = {
     id: string;
-    hostBy: string;
+    hostedBy: string;
     displayName: string;
     imageUrls: Array<string>;
     cover: string;
@@ -23,10 +24,17 @@ const fetchRooms = async (params: any) => {
     await sleep(300);
     // console.log(params);
     return new Promise((resolve) => {
-        resolve({
-            data: rooms as Array<Room>,
-            message: 'success',
-        });
+        if (/zh/.test(Localization.locale)) {
+            resolve({
+                data: zhRooms as Array<Room>,
+                message: 'success',
+            });
+        } else {
+            resolve({
+                data: rooms as Array<Room>,
+                message: 'success',
+            });
+        }
     });
 };
 

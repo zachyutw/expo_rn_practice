@@ -69,15 +69,15 @@ const SocialIcon = ({ children }: SocialIconProps) => {
 const SocialLogin = () => {
     return (
         <Box flexDirection="row" justifyContent="center">
-            <SocialIcon>
+            {/* <SocialIcon>
                 <Facebook />
-            </SocialIcon>
+            </SocialIcon> */}
             <SocialIcon>
                 <Google />
             </SocialIcon>
-            <SocialIcon>
+            {/* <SocialIcon>
                 <Apple />
-            </SocialIcon>
+            </SocialIcon> */}
         </Box>
     );
 };

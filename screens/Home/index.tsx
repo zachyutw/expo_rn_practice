@@ -56,6 +56,7 @@ const HomeNavigator = () => {
                 activeTintColor: 'white',
                 inactiveTintColor: 'grey',
             }}
+            initialRouteName="HomeStack"
         >
             <Tab.Screen name="RoomStack" component={RoomStack} />
             <Tab.Screen name="HomeStack" component={HomeStack} />

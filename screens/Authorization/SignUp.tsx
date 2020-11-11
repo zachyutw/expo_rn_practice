@@ -1,11 +1,13 @@
 import React, { useRef } from 'react';
-import { TextInput as RNTextInput } from 'react-native';
+import { TextInput as RNTextInput, SafeAreaView } from 'react-native';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { t } from 'i18n-js';
 
-import { Container, Text, Box } from '../../components/Basic';
+import { Text, Box } from '../../components/Basic';
+import Container from './components/Container';
 import Button from '../../components/Button/Button';
-import { AuthNavigationProps } from './index';
+import { AuthNavigationProps } from './navigation';
 import TextInput from '../../components/Form/TextInput';
 
 import { createUserByEmailPassword } from '../../redux/slices/authorizationSlice';
@@ -15,16 +17,24 @@ import * as GoogleSignIn from 'expo-google-sign-in';
 import Footer from './components/Footer';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { unwrapResult } from '@reduxjs/toolkit';
+import constants from './constants';
+
+const { signUp: Constants } = constants;
 
 const SignUpSchema = Yup.object().shape({
     password: Yup.string()
-        .min(2, 'Too Short!')
-        .max(50, 'Too Long!')
-        .required('Required'),
+        .min(2, t(Constants.form.password.errors.min))
+        .max(50, t(Constants.form.password.errors.max))
+        .required(t(Constants.form.password.errors.required)),
     passwordConfirmation: Yup.string()
-        .equals([Yup.ref('password')], "Passwords don't match")
-        .required('Required'),
-    email: Yup.string().email('Invalid email').required('Required'),
+        .equals(
+            [Yup.ref('password')],
+            t(Constants.form.passwordConfirmation.errors.equals)
+        )
+        .required(t(Constants.form.passwordConfirmation.errors.required)),
+    email: Yup.string()
+        .email(t(Constants.form.email.errors.invalid))
+        .required(t(Constants.form.email.errors.required)),
 });
 
 const SignUp = ({ navigation }: AuthNavigationProps<'SignUp'>) => {
@@ -41,15 +51,12 @@ const SignUp = ({ navigation }: AuthNavigationProps<'SignUp'>) => {
     } = useFormik({
         validationSchema: SignUpSchema,
         initialValues: {
-            email: 'rntest001@test.com',
-            password: 'Qwer1234',
-            passwordConfirmation: 'Qwer1234',
+            email: '',
+            password: '',
+            passwordConfirmation: '',
             remember: true,
         },
         onSubmit: ({ email, password }) => {
-            // actions({email,password});
-            console.log('signUp');
-
             dispatch<any>(createUserByEmailPassword({ email, password }))
                 .then(unwrapResult)
                 .then(() => {
@@ -66,24 +73,24 @@ const SignUp = ({ navigation }: AuthNavigationProps<'SignUp'>) => {
     const passwordConfirmation = useRef<RNTextInput>(null);
     const footer = (
         <Footer
-            title="Already have an account?"
-            action="Login here"
+            title={t(Constants.footer.title)}
+            action={t(Constants.footer.action)}
             onPress={() => navigation.navigate('Login')}
         />
     );
     return (
         <Container pattern={1} {...{ footer }}>
             <Text variant="title1" textAlign="center" marginBottom="l">
-                Create account
+                {t(Constants.title1)}
             </Text>
             <Text variant="body" textAlign="center" marginBottom="l">
-                Let’s us know what your name, email, and your password
+                {t(Constants.body)}
             </Text>
             <Box>
                 <Box marginBottom="m">
                     <TextInput
                         icon="mail"
-                        placeholder="Enter your Email"
+                        placeholder={t(Constants.form.email.placeholder)}
                         onChangeText={handleChange('email')}
                         onBlur={handleBlur('email')}
                         error={errors.email}
@@ -100,7 +107,7 @@ const SignUp = ({ navigation }: AuthNavigationProps<'SignUp'>) => {
                     <TextInput
                         ref={password}
                         icon="lock"
-                        placeholder="Enter your Password"
+                        placeholder={t(Constants.form.password.placeholder)}
                         onChangeText={handleChange('password')}
                         onBlur={handleBlur('password')}
                         error={errors.password}
@@ -120,7 +127,9 @@ const SignUp = ({ navigation }: AuthNavigationProps<'SignUp'>) => {
                     <TextInput
                         ref={passwordConfirmation}
                         icon="lock"
-                        placeholder="Confirm your Password"
+                        placeholder={t(
+                            Constants.form.passwordConfirmation.placeholder
+                        )}
                         onChangeText={handleChange('passwordConfirmation')}
                         onBlur={handleBlur('passwordConfirmation')}
                         error={errors.passwordConfirmation}
@@ -142,7 +151,7 @@ const SignUp = ({ navigation }: AuthNavigationProps<'SignUp'>) => {
                     <Button
                         variant="primary"
                         onPress={handleSubmit}
-                        label="Create your account"
+                        label={t(Constants.submitButton)}
                     />
                 </Box>
             </Box>

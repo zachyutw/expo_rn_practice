@@ -2,7 +2,7 @@
     {
         "id": "Bedroom101",
         "hostedBy": "Little Hill Side",
-        "displayName": "Bedroom101",
+        "displayName": "招牌雙人房",
         "imageUrls": [
             "https://i.imgur.com/OGCGs0Q.jpg",
             "https://i.imgur.com/easporz.jpg",
@@ -13,14 +13,14 @@
         "colors": ["#BCC98F", "#E0E0E0", "#BE9F2D"],
         "price": "1000",
         "currency": "NT",
-        "description": "Signature Double Room, A natural and relaxing environment",
+        "description": "淡綠色的色調，將撫平你的浮躁的情緒，房內有一張雙人床，床旁有安置一個小巧的梳妝台，床尾有一個適合區塊，專門留給希望能夠專心閱讀的你。",
         "people": 2,
         "floor": 1
     },
     {
         "id": "Bedroom102",
         "hostedBy": "Little Hill Side",
-        "displayName": "Bedroom102",
+        "displayName": "玲瓏雙人房",
         "imageUrls": [
             "https://i.imgur.com/GnFAkmQ.jpg",
             "https://i.imgur.com/BAva2j8.jpg",
@@ -31,14 +31,14 @@
         "colors": ["#544E3C", "#AA977F", "#A47D43"],
         "price": "1000",
         "currency": "NT",
-        "description": "Cure Double Room, Small and comfortable space",
+        "description": "灰色讓世界變得和平，這是我們最小的一間房間，但是我們卻花了很多心思讓每個地方讓你可以觸手可及，當你厭倦生活中各種舟車勞累，來試試這種一抬手，事務就在你周遭的輕便感覺。",
         "people": 2,
         "floor": 1
     },
     {
         "id": "Bedroom201",
         "hostedBy": "Little Hill Side",
-        "displayName": "Bedroom201",
+        "displayName": "新古典四人房",
         "imageUrls": [
             "https://i.imgur.com/sYMb9gm.jpg",
             "https://i.imgur.com/jC5zlJq.jpg",
@@ -57,14 +57,14 @@
         ],
         "price": "2000",
         "currency": "NT",
-        "description": "Classic big room",
+        "description": "超寬敞房間，獨立的沙發組，與懸吊椅，讓客人能夠輕鬆的開創一個輕鬆的小型聚會，讓歡樂瀰漫在這個房間。",
         "people": 4,
         "floor": 2
     },
     {
         "id": "Bedroom202",
         "hostedBy": "Little Hill Side",
-        "displayName": "Bedroom202",
+        "displayName": "四人親子房",
         "imageUrls": [
             "https://i.imgur.com/DamkcoY.jpg",
             "https://i.imgur.com/ysG0A1A.jpg",
@@ -77,14 +77,14 @@
         "colors": ["#9AB0A8", "#7E7A64", "#967346", "#1E6E91"],
         "price": "2000",
         "currency": "NT",
-        "description": "Parenting room",
+        "description": "親子住宿最適合的房間，上下鋪的雙人床設計讓小孩與大人一起共享秘密基地的兒童喜悅。床外有一個小小卻佈置的陽台，十分適合在午後休憩時，欣賞美麗的夕陽。",
         "people": 4,
         "floor": 2
     },
     {
         "id": "Bedroom301",
         "hostedBy": "Little Hill Side",
-        "displayName": "Bedroom301",
+        "displayName": "超大四人房",
         "imageUrls": [
             "https://i.imgur.com/8JUnXrg.jpg",
             "https://i.imgur.com/KHXPAQu.jpg",
@@ -96,7 +96,7 @@
             "https://i.imgur.com/6ARTF9X.jpg"
         ],
         "cover": "https://i.imgur.com/8JUnXrg.jpg",
-        "bed": "2 king beds",
+        "bed": "2 king床",
         "colors": [
             "#865A38",
             "#BD8D6F",
@@ -107,7 +107,7 @@
         ],
         "price": "2000",
         "currency": "NT",
-        "description": "Landscape room",
+        "description": "座落於隔樓樓頂，有著優良視野，你可以在露珠瀰漫的中清晨欣賞窗外綠蔭冒然的山丘。開放的空間，紅色的牆磚與木質地板，將帶領客人前往一個專屬於放鬆空間。",
         "people": 4,
         "floor": 3
     }

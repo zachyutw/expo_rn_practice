@@ -5,6 +5,7 @@ import {
 } from '@reduxjs/toolkit';
 import { Platform } from 'react-native';
 import firebase from 'firebase';
+import { signOut } from './authorizationSlice';
 import uuid from 'uuid-random';
 // import 'firebase/firestore';
 // import 'firebase/database';
@@ -173,6 +174,9 @@ const userSlice = createSlice({
             state.loading = 'rejected';
             state.error = action.error;
             console.log(action.error);
+        },
+        [`${signOut.fulfilled}`]: (state) => {
+            state.data = {};
         },
     },
 });

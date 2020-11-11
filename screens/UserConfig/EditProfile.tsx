@@ -1,16 +1,18 @@
 import { DrawerActions } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import * as ImagePicker from 'expo-image-picker';
+import * as ImageManipulator from 'expo-image-manipulator';
 import { Dimensions, Image, TouchableOpacity, Platform } from 'react-native';
+
 import { Box, Text } from '../../components/Basic';
 import { useTheme } from '../../styles/Theme';
 import Header from './components/Header';
-
-import { fetchCurrentUser, updateAvatar } from '../../redux/slices/userSlice';
+import { updateAvatar } from '../../redux/slices/userSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import PersonalInfo from './components/PersonalInfo';
 import Spinner from '../../components/AppLoading/Spinner';
 import { HomeNavigationProps } from './navigation';
+
 // import firebase from 'firebase';
 const { width } = Dimensions.get('window');
 
@@ -45,12 +47,26 @@ const EditProfile = ({ navigation }: HomeNavigationProps<'EditProfile'>) => {
         });
 
         if (!result.cancelled) {
-            dispatch<any>(updateAvatar(result));
+            // console.log(result);
+            const manipResult = await ImageManipulator.manipulateAsync(
+                result.uri,
+                [
+                    {
+                        resize: {
+                            height: 300,
+                            width: 400,
+                        },
+                    },
+                ],
+                { compress: 0.8, format: ImageManipulator.SaveFormat.PNG }
+            );
+
+            dispatch<any>(updateAvatar(manipResult));
         }
     };
     return (
         <Box flex={1} backgroundColor="background">
-            <Box flex={0.25} backgroundColor="background">
+            <Box flex={0.3} backgroundColor="background">
                 <Box
                     position="absolute"
                     top={0}
@@ -63,9 +79,8 @@ const EditProfile = ({ navigation }: HomeNavigationProps<'EditProfile'>) => {
                     <Header
                         title="Edit Profile"
                         left={{
-                            icon: 'menu',
-                            onPress: () =>
-                                navigation.dispatch(DrawerActions.openDrawer()),
+                            icon: 'arrow-left',
+                            onPress: () => navigation.goBack(),
                         }}
                         dark
                     />
@@ -74,7 +89,7 @@ const EditProfile = ({ navigation }: HomeNavigationProps<'EditProfile'>) => {
             <Box>
                 <Box
                     position="absolute"
-                    left={width / 2 - 50}
+                    right={width / 2 - 50}
                     top={-50}
                     backgroundColor="background4"
                     width={100}

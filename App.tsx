@@ -13,15 +13,28 @@ import store from './redux/store';
 import { ThemeProvider } from './styles/Theme';
 import { theme } from './styles/custom-theme';
 import fonts from './styles/fonts';
-
+import i18n from 'i18n-js';
+import * as Localization from 'expo-localization';
 import Constants from 'expo-constants';
-
+import enLocale from './localization/en';
+import zhTwLocale from './localization/zhTw';
 import * as firebase from 'firebase';
 import 'firebase/firestore';
 import 'firebase/database';
 import 'firebase/auth';
 
-let app;
+i18n.translations = {
+    en: enLocale,
+    'zh-Hant-TW': zhTwLocale,
+    'zh-TW': zhTwLocale,
+    'zh-Hant': zhTwLocale,
+    zh: zhTwLocale,
+};
+
+i18n.locale = Localization.locale;
+i18n.fallbacks = true;
+
+console.log(Localization.locale);
 
 const firebaseConfig = {
     apiKey: 'AIzaSyBA9nJM9wFmKMSEK_n4DFS8zfbGXHhsZZQ',

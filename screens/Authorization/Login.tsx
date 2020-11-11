@@ -1,26 +1,32 @@
 import React, { useRef, useState } from 'react';
-import { TextInput as RNTextInput } from 'react-native';
+import { TextInput as RNTextInput, SafeAreaView } from 'react-native';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { BorderlessButton } from 'react-native-gesture-handler';
 import { CommonActions } from '@react-navigation/native';
-
+import { t } from 'i18n-js';
 import Button from '../../components/Button/Button';
-import { Container, Text, Box } from '../../components/Basic';
-import { AuthNavigationProps } from './index';
+import { Text, Box } from '../../components/Basic';
+import Container from './components/Container';
+import { AuthNavigationProps } from './navigation';
 import TextInput from '../../components/Form/TextInput';
 import Checkbox from '../../components/Form/Checkbox';
 import Footer from './components/Footer';
 import { signInWithEmailAndPassword } from '../../redux/slices/authorizationSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { unwrapResult } from '@reduxjs/toolkit';
+import constants from './constants';
+
+const { login: Constants } = constants;
 
 const LoginSchema = Yup.object().shape({
     password: Yup.string()
-        .min(2, 'Too Short!')
-        .max(50, 'Too Long!')
-        .required('Required'),
-    email: Yup.string().email('Invalid email').required('Required'),
+        .min(2, Constants.form.password.errors.min)
+        .max(50, Constants.form.password.errors.max)
+        .required(Constants.form.password.errors.required),
+    email: Yup.string()
+        .email(Constants.form.email.errors.invalid)
+        .required(Constants.form.email.errors.required),
 });
 
 const Login = ({ navigation }: AuthNavigationProps<'Login'>) => {
@@ -55,24 +61,24 @@ const Login = ({ navigation }: AuthNavigationProps<'Login'>) => {
     const password = useRef<RNTextInput>(null);
     const footer = (
         <Footer
-            title="Don’t have an account?"
-            action="Sign Up here"
+            title={t(Constants.footer.title)}
+            action={t(Constants.footer.action)}
             onPress={() => navigation.navigate('SignUp')}
         />
     );
     return (
         <Container pattern={0} {...{ footer }}>
             <Text variant="title1" textAlign="center" marginBottom="l">
-                Welcome back
+                {t(Constants.title1)}
             </Text>
             <Text variant="body" textAlign="center" marginBottom="l">
-                Use your credentials below and login to your account
+                {t(Constants.body)}
             </Text>
             <Box>
                 <Box marginBottom="m">
                     <TextInput
                         icon="mail"
-                        placeholder="Enter your Email"
+                        placeholder={t(Constants.form.email.placeholder)}
                         onChangeText={handleChange('email')}
                         onBlur={handleBlur('email')}
                         error={errors.email}
@@ -87,7 +93,7 @@ const Login = ({ navigation }: AuthNavigationProps<'Login'>) => {
                 <TextInput
                     ref={password}
                     icon="lock"
-                    placeholder="Enter your Password"
+                    placeholder={t(Constants.form.password.placeholder)}
                     onChangeText={handleChange('password')}
                     onBlur={handleBlur('password')}
                     error={errors.password}
@@ -106,7 +112,7 @@ const Login = ({ navigation }: AuthNavigationProps<'Login'>) => {
                     marginVertical="s"
                 >
                     <Checkbox
-                        label="Remember me"
+                        label={t(Constants.form.remember.label)}
                         checked={values.remember}
                         onChange={() =>
                             setFieldValue('remember', !values.remember)
@@ -116,13 +122,13 @@ const Login = ({ navigation }: AuthNavigationProps<'Login'>) => {
                         onPress={() => navigation.navigate('ForgotPassword')}
                     >
                         <Text variant="button" color="primary">
-                            Forgot password
+                            {t(Constants.forgotPassword)}
                         </Text>
                     </BorderlessButton>
                 </Box>
                 {error.message && (
                     <Box marginVertical="s">
-                        <Text color="danger">{error.message}</Text>
+                        <Text color="danger">{t(error.message)}</Text>
                     </Box>
                 )}
 
@@ -130,7 +136,7 @@ const Login = ({ navigation }: AuthNavigationProps<'Login'>) => {
                     <Button
                         variant="primary"
                         onPress={handleSubmit}
-                        label="Log into your account"
+                        label={t(Constants.loginButton)}
                     />
                 </Box>
             </Box>

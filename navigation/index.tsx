@@ -2,7 +2,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import { RootStackParamList } from '../types';
-import BottomTabNavigator from './BottomTabNavigator';
+// import BottomTabNavigator from './BottomTabNavigator';
 import LinkingConfiguration from './LinkingConfiguration';
 import StartScreen from '../screens/StartScreen';
 import AuthorizationScreen from '../screens/Authorization';
@@ -23,7 +23,7 @@ export default function Navigation() {
             />
             <Stack.Screen name="Home" component={HomeScreen} />
 
-            <Stack.Screen name="Root" component={BottomTabNavigator} />
+            {/* <Stack.Screen name="Root" component={BottomTabNavigator} /> */}
             <Stack.Screen
                 name="NotFound"
                 component={NotFoundScreen}

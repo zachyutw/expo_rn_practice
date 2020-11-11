@@ -13,6 +13,7 @@ interface BaseDrawerItem {
     icon: string;
     color: keyof Theme['colors'];
     label: string;
+    role: string;
 }
 
 interface ScreenDrawerItem extends BaseDrawerItem {
@@ -31,9 +32,7 @@ export type DrawerItemProps = ScreenDrawerItem | OnPressDrawerItem;
 const DrawerItem = ({ icon, color, label, ...props }: DrawerItemProps) => {
     const theme = useTheme();
     const dispatch = useAppDispatch();
-    const navigation = useNavigation<
-        DrawerNavigationProp<HomeRoutes, 'OutfitIdeas'>
-    >();
+    const navigation = useNavigation<DrawerNavigationProp<HomeRoutes>>();
     return (
         <RectButton
             onPress={() =>

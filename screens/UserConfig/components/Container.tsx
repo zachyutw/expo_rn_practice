@@ -15,7 +15,7 @@ const Container = ({ children }) => {
                     backgroundColor="secondary"
                 ></Box>
             </Box>
-            <Box flex={0.6}>{children}</Box>
+            <Box flex={1}>{children}</Box>
             <Box flex={0.2} backgroundColor="background">
                 <Box
                     position="absolute"
