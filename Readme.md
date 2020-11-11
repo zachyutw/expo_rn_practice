@@ -1,6 +1,6 @@
-# Expo RN dating
+# Expo RN
 
-Use Expo Rn to build a dating App that allows users to interact with each other
+Use Expo Rn to build a hostel App
 
 ## Project Target
 

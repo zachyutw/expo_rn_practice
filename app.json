@@ -25,9 +25,10 @@
     "web": {
       "favicon": "./assets/images/favicon.png"
     },
-    "description": "",
+    "description": "Use Expo Rn to build a hostel App",
     "android": {
       "package": "com.zachyutw.expo-rn-practice"
-    }
+    },
+    "githubUrl": "https://github.com/zachyutw/expo_rn_practice.git"
   }
 }
