@@ -6,4 +6,7 @@ export default {
     extra: {
         testId: process.env.EXPO_TEST_ID,
     },
+    android: {
+        package: 'com.zachyutw.expo_rn_practice',
+    },
 };

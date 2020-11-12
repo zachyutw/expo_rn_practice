@@ -4,6 +4,7 @@ import signUp from './zhTW-signUp.json';
 import welcome from './zhTw-welcome.json';
 import home from './zhTW-home.json';
 import room from './zhTW-room.json';
+import navigation from './zhTw-navigation.json';
 
 export default {
     ...general,
@@ -12,4 +13,5 @@ export default {
     ...welcome,
     ...home,
     ...room,
+    ...navigation,
 } as any;

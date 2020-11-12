@@ -4,14 +4,17 @@ import { t } from 'i18n-js';
 
 import { Box, Text } from '../../components/Basic';
 import { fetchRoomsThunk } from '../../redux/slices/roomSlice';
-import { Calendar } from '@ui-kitten/components';
+import { Calendar, DateService } from '@ui-kitten/components';
+import { MomentDateService } from '@ui-kitten/moment';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { fetchEventsThunk } from '../../redux/slices/bookingSlice';
 import constants from './constants';
-
+import moment from 'moment';
+import DayCell from './components/DayCell';
 const { home: Constants } = constants;
 
-import moment from 'moment';
+const dateService = new MomentDateService();
+
 const styles = StyleSheet.create({
     cover: {
         width: '100%',
@@ -24,8 +27,8 @@ const Home = ({ navigation }) => {
     useEffect(() => {
         dispatch<any>(fetchEventsThunk());
     }, []);
-    const { entities } = useAppSelector(({ booking }) => booking);
 
+    // console.log(entities);
     return (
         <ScrollView>
             <Box flex={1} justifyContent="flex-start" alignItems="center">
@@ -48,13 +51,18 @@ const Home = ({ navigation }) => {
                     alignItems="center"
                 >
                     <Calendar
-                        filter={(date) =>
-                            !entities.some(({ startDate }) =>
-                                moment(date).isSame(startDate)
-                            )
-                        }
+                        dateService={dateService}
+                        // filter={(date) =>
+                        //     !entities.some(({ startDate }) =>
+                        //         moment(date).isSame(startDate)
+                        //     )
+                        // }
+                        renderDay={(props, style) => (
+                            <DayCell {...props} style={style} />
+                        )}
+                        boundingMonth
                         style={{ borderColor: 'transparent' }}
-                        date={new Date()}
+                        date={moment()}
                     />
                 </Box>
 

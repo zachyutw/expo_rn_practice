@@ -2,23 +2,18 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import icsToJson from 'ics-to-json';
 import moment from 'moment';
+import { DateService } from '@ui-kitten/components';
 
 const icsUrl =
-    'https://calendar.google.com/calendar/ical/u8uf8b1kkm1838t01gr8eavs6c%40group.calendar.google.com/private-0f78d7bb44899f8115a1574ce7af2f35/basic.ics';
+    'https://calendar.google.com/calendar/ical/clhipdh9r9fr8j8g70ohm1k9jg%40group.calendar.google.com/private-7dc318ba5665048bd57e9c338ad9ebbb/basic.ics';
 
 export const fetchEventsFromGoogleCalendar = () => {
     return axios.get(icsUrl).then((result) => {
         try {
-            return icsToJson(result.data as Array<Event>).map(
-                ({ startDate, endDate, ...rest }) => ({
-                    startDate: moment(startDate, 'YYYYMMDDThhmmss').format(
-                        'MM/DD/yyyy'
-                    ),
-                    endDate: moment(startDate, 'YYYYMMDDThhmmss').format(
-                        'MM/DD/yyyy'
-                    ),
-                    ...rest,
-                })
+            return icsToJson(
+                result.data as Array<string>
+            ).map(({ startDate }) =>
+                moment(startDate, 'YYYYMMDDThhmmss').format('YYYY-MM-DD')
             );
         } catch (err) {
             console.log(err);
@@ -48,7 +43,7 @@ export const fetchEventsThunk = createAsyncThunk(
 );
 
 type EventInitialState = {
-    entities: Array<Event>;
+    entities: Array<string>;
     loading: 'init' | 'fulfilled' | 'pending' | 'rejected';
 };
 

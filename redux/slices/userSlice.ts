@@ -40,6 +40,8 @@ const getCurrentUser = () =>
             firebase.auth().onAuthStateChanged((user) => {
                 if (user) {
                     resolve(user);
+                } else {
+                    reject(new Error('user not found'));
                 }
             });
         } catch (err) {
@@ -139,7 +141,7 @@ const userSlice = createSlice({
             state.data = action.payload;
             state.loading = 'fulfilled';
         },
-        [`${fetchCurrentUser.pending}`]: (state) => {
+        [`${fetchCurrentUser.pending}`]: (state, action) => {
             state.loading = 'pending';
             state.error = {};
         },
@@ -173,7 +175,6 @@ const userSlice = createSlice({
         [`${updateAvatar.rejected}`]: (state, action) => {
             state.loading = 'rejected';
             state.error = action.error;
-            console.log(action.error);
         },
         [`${signOut.fulfilled}`]: (state) => {
             state.data = {};

@@ -2,12 +2,17 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
 import { Ionicons } from '@expo/vector-icons';
+import { t } from 'i18n-js';
+
 import Home from './Home';
 import HomeDetail from './HomeDetail';
 import { HomeRoutes, HomeStackRoutes } from './navigation';
 import UserConfigStack from '../UserConfig';
 import RoomStack from '../Rooms';
 import { theme } from '../../styles/Theme';
+import constants from './constants';
+
+const { navigationTabs: Constants } = constants;
 
 const Tab = createBottomTabNavigator<HomeStackRoutes>();
 const Stack = createSharedElementStackNavigator<HomeRoutes>();
@@ -40,7 +45,7 @@ const HomeNavigator = () => {
                     if (route.name === 'HomeStack') {
                         iconName = focused ? 'ios-home' : 'ios-home';
                     } else if (route.name === 'UserConfig') {
-                        iconName = focused ? 'ios-list-box' : 'ios-list';
+                        iconName = focused ? 'md-settings' : 'md-settings';
                     } else if (route.name === 'RoomStack') {
                         iconName = focused ? 'ios-bed' : 'md-bed';
                     }
@@ -58,9 +63,21 @@ const HomeNavigator = () => {
             }}
             initialRouteName="HomeStack"
         >
-            <Tab.Screen name="RoomStack" component={RoomStack} />
-            <Tab.Screen name="HomeStack" component={HomeStack} />
-            <Tab.Screen name="UserConfig" component={UserConfigStack} />
+            <Tab.Screen
+                name="RoomStack"
+                component={RoomStack}
+                options={{ title: t(Constants.RoomStack.title) }}
+            />
+            <Tab.Screen
+                name="HomeStack"
+                component={HomeStack}
+                options={{ title: t(Constants.HomeStack.title) }}
+            />
+            <Tab.Screen
+                name="UserConfig"
+                component={UserConfigStack}
+                options={{ title: t(Constants.UserConfig.title) }}
+            />
         </Tab.Navigator>
     );
 };

@@ -20,26 +20,27 @@ const Home = ({ navigation }) => {
     }, []);
     const { entities } = useAppSelector(({ room }) => room);
     return (
-        <Box
-            flex={1}
-            justifyContent="center"
-            alignItems="stretch"
-            backgroundColor="background"
-            paddingTop="xl"
-        >
-            <Box backgroundColor="secondary">
-                <Text variant="title1" padding="s" color="background2">
-                    {t(Constants.title1)}
-                </Text>
-            </Box>
-            <ScrollView>
-                <Box flex={1}>
-                    {entities.map((room) => (
-                        <RoomListItem key={room.id} item={room} />
-                    ))}
+        <SafeAreaView style={{ flex: 1 }}>
+            <Box
+                flex={1}
+                justifyContent="center"
+                alignItems="stretch"
+                backgroundColor="background"
+            >
+                <Box backgroundColor="secondary">
+                    <Text variant="title1" padding="s" color="background2">
+                        {t(Constants.title1)}
+                    </Text>
                 </Box>
-            </ScrollView>
-        </Box>
+                <ScrollView>
+                    <Box flex={1}>
+                        {entities.map((room) => (
+                            <RoomListItem key={room.id} item={room} />
+                        ))}
+                    </Box>
+                </ScrollView>
+            </Box>
+        </SafeAreaView>
     );
 };
 

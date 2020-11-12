@@ -10,4 +10,15 @@ export default {
             'home_description_4',
         ],
     },
+    navigationTabs: {
+        UserConfig: {
+            title: 'Settings',
+        },
+        HomeStack: {
+            title: 'Home',
+        },
+        RoomStack: {
+            title: 'Rooms',
+        },
+    },
 };

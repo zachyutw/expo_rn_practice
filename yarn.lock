@@ -4048,6 +4048,11 @@
     hoist-non-react-statics "^3.2.1"
     lodash.merge "^4.6.1"
 
+"@ui-kitten/date-fns@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@ui-kitten/date-fns/-/date-fns-5.0.0.tgz#b8e74ce84dbbe34d0e831e5231c88d114ee7d408"
+  integrity sha512-kauhX2f3E192pqTmdclAXRjhkgZ/9HYi5tjY1Fum6V8KqwfP14W7prhNpS5PKP3bCAZk1SHaLRde6v8qLKRQFg==
+
 "@ui-kitten/eva-icons@^5.0.0":
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/@ui-kitten/eva-icons/-/eva-icons-5.0.0.tgz#b8ab2fea3dafcb9f914534ef66a5dfd1badfeb1d"
@@ -4059,6 +4064,11 @@
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/@ui-kitten/metro-config/-/metro-config-5.0.0.tgz#28d60d781def017e6def3b96ce0d1594d44efb2e"
   integrity sha512-ImnpqdzNzZOgOHbrK27RgObzhMKT5iw2ZSqAZmEHUaVQexOwHlA1yBCHI2TnhuwtqiRsgYOW0zQywr05CnCPpQ==
+
+"@ui-kitten/moment@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@ui-kitten/moment/-/moment-5.0.0.tgz#b4dd043c649321b7b1316aa0c82e588d82a5b9eb"
+  integrity sha512-yM9nozxtD8bup5FXp5/CiA4ioDry8xlNX3WCved8GTrAeXiDkNuPomrmO8LC+3xYvJ+5gpNmXUkr7qKHiMkzEA==
 
 "@unimodules/core@~5.5.0":
   version "5.5.0"

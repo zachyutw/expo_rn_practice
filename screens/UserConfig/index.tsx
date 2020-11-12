@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import EditProfile from './EditProfile';
+import NotReady from './NotReady';
 import { createStackNavigator } from '@react-navigation/stack';
 import UserConfig from './UserConfig';
 import { fetchCurrentUser } from '../../redux/slices/userSlice';
@@ -16,6 +17,8 @@ const UserConfigStack = () => {
         <Stack.Navigator headerMode="none">
             <Stack.Screen name="UserConfig" component={UserConfig} />
             <Stack.Screen name="EditProfile" component={EditProfile} />
+            <Stack.Screen name="Favorite" component={NotReady} />
+            <Stack.Screen name="Notification" component={NotReady} />
         </Stack.Navigator>
     );
 };
