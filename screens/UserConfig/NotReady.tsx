@@ -1,7 +1,12 @@
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
+import { t } from 'i18n-js';
+
 import { Box, Text } from '../../components/Basic';
 import Header from './components/Header';
-import { useNavigation } from '@react-navigation/native';
+import constants from './constants';
+
+const { notReady: Constants } = constants;
 
 const NotReady = () => {
     const navigation = useNavigation();
@@ -43,14 +48,14 @@ const NotReady = () => {
                     padding="xl"
                 >
                     <Text variant="hero" color="background2">
-                        Working On
+                        {t(Constants.hero)}
                     </Text>
                     <Text
                         textAlign="right"
                         variant="title1"
                         color="background2"
                     >
-                        Coming Soon...
+                        {t(Constants.title1)}
                     </Text>
                 </Box>
             </Box>

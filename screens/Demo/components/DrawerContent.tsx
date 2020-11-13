@@ -13,7 +13,7 @@ import DrawerItem, { DrawerItemProps } from './DrawerItem';
 import { useAppDispatch, useAppSelector } from '../../../redux/store';
 import { unwrapResult } from '@reduxjs/toolkit';
 import * as ImagePicker from 'expo-image-picker';
-import { signOut } from '../../../redux/slices/authorizationSlice';
+import { signOutThunk } from '../../../redux/slices/authorizationSlice';
 export const assets = [
     {
         uri: 'https://loremflickr.com/1000/1000/model',

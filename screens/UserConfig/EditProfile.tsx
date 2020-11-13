@@ -7,7 +7,7 @@ import { Dimensions, Image, TouchableOpacity, Platform } from 'react-native';
 import { Box, Text } from '../../components/Basic';
 import { useTheme } from '../../styles/Theme';
 import Header from './components/Header';
-import { updateAvatar } from '../../redux/slices/userSlice';
+import { updateAvatarThunk } from '../../redux/slices/userSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import PersonalInfo from './components/PersonalInfo';
 import Spinner from '../../components/AppLoading/Spinner';
@@ -61,7 +61,7 @@ const EditProfile = ({ navigation }: HomeNavigationProps<'EditProfile'>) => {
                 { compress: 0.8, format: ImageManipulator.SaveFormat.PNG }
             );
 
-            dispatch<any>(updateAvatar(manipResult));
+            dispatch<any>(updateAvatarThunk(manipResult));
         }
     };
     return (

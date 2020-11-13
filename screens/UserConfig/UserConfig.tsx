@@ -5,6 +5,8 @@ import {
     CommonActions,
     DrawerActions,
 } from '@react-navigation/native';
+import { t } from 'i18n-js';
+
 import { Box, Text } from '../../components/Basic';
 import { useTheme } from '../../styles/Theme';
 import DrawerItem, { DrawerItemProps } from './components/DrawerItem';
@@ -12,8 +14,12 @@ import Container from './components/Container';
 import Header from './components/Header';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { unwrapResult } from '@reduxjs/toolkit';
-import { signOut } from '../../redux/slices/authorizationSlice';
+import { signOutThunk } from '../../redux/slices/authorizationSlice';
 import Spinner from '../../components/AppLoading/Spinner';
+import constants from './constants';
+
+const { userConfig: Constants } = constants;
+
 const { width } = Dimensions.get('window');
 export const DRAWER_WIDTH = width * 0.8;
 const aspectRatio = 750 / 1125;
@@ -23,7 +29,7 @@ const items: DrawerItemProps[] = [
     {
         id: 'favorites',
         icon: 'heart',
-        label: 'Favorites',
+        label: Constants.drawList.favorites,
         screen: 'Favorite',
         color: 'drawer1',
         role: 'user',
@@ -31,7 +37,7 @@ const items: DrawerItemProps[] = [
     {
         id: 'editProfile',
         icon: 'user',
-        label: 'Edit Profile',
+        label: Constants.drawList.editProfile,
         screen: 'EditProfile',
         color: 'drawer2',
         role: 'user',
@@ -39,7 +45,7 @@ const items: DrawerItemProps[] = [
     {
         id: 'notificationSettings',
         icon: 'settings',
-        label: 'Notifications Settings',
+        label: Constants.drawList.notificationSettings,
         screen: 'Notification',
         color: 'drawer4',
         role: 'user',
@@ -47,7 +53,7 @@ const items: DrawerItemProps[] = [
     {
         id: 'logout',
         icon: 'log-out',
-        label: 'Logout',
+        label: Constants.drawList.logout,
         color: 'secondary',
         role: 'user',
         onPress: (navigation, dispatch) => {
@@ -59,7 +65,7 @@ const items: DrawerItemProps[] = [
             // );
 
             // TODO firebase signOut error
-            dispatch<any>(signOut())
+            dispatch<any>(signOutThunk())
                 .then(unwrapResult)
                 .then(() => {
                     console.log('log out');
@@ -143,7 +149,7 @@ const UserConfig = () => {
                                     color="text"
                                     textAlign="center"
                                 >
-                                    {displayName || 'Default User'}
+                                    {displayName || t(Constants.defaultUser)}
                                 </Text>
                             </Box>
                         </>

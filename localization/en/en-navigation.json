@@ -1,5 +1,5 @@
 {
-    "Settings": "Settings",
-    "Home": "Home",
-    "Rooms": "Rooms"
+    "home_UserConfig_title": "Settings",
+    "home_HomeStack_title": "Home",
+    "home_RoomStack_title": "Rooms"
 }

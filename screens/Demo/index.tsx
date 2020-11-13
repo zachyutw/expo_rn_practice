@@ -7,7 +7,7 @@ import DrawerContent, { DRAWER_WIDTH } from './components/DrawerContent';
 import EditProfile from './EditProfile';
 import { unwrapResult } from '@reduxjs/toolkit';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
-import { fetchCurrentUser } from '../../redux/slices/userSlice';
+import { fetchCurrentUserThunk } from '../../redux/slices/userSlice';
 
 import { useNavigation, CommonActions } from '@react-navigation/native';
 import { HomeRoutes } from './navigation';
@@ -112,7 +112,7 @@ const HomeNavigator = () => {
     const dispatch = useAppDispatch();
     const navigation = useNavigation();
     useEffect(() => {
-        dispatch<any>(fetchCurrentUser())
+        dispatch<any>(fetchCurrentUserThunk())
             .then(unwrapResult)
             .catch((err) => {
                 if (

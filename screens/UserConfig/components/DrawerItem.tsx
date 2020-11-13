@@ -2,6 +2,8 @@ import React from 'react';
 import { RectButton } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
+import { t } from 'i18n-js';
+
 import { Box, Text } from '../../../components/Basic';
 import RoundedIcon from '../../../components/Icon/RoundedIcon';
 import { HomeRoutes } from '../navigation';
@@ -51,7 +53,7 @@ const DrawerItem = ({ icon, color, label, ...props }: DrawerItemProps) => {
                     color="background"
                 />
                 <Text variant="button" color="secondary" marginLeft="m">
-                    {label}
+                    {t(label)}
                 </Text>
             </Box>
         </RectButton>

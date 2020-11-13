@@ -1,4 +1,11 @@
 {
-    "Bedrooms Introduce": "Bedrooms Introduce",
-    "roomDetail people": "%{people} people"
+    "room_title1": "Bedrooms Introduce",
+    "roomDetail_people": "%{people} people",
+    "roomDetail_additionalRule_title": "Additional rules",
+    "roomDetail_additionalRule_text": "All furniture and electrical appliances in the house should not be moved and taken out. The kitchen utensils after use need to be cleaned. Shoes should be taken off inside the house. Indoor/outdoor slippers are provided. Smoking is prohibited inside the house. If you want to smoke, please go outside the courtyard or outdoor balcony.",
+    "roomDetail_houseRules_0_text": "Check-in:  After 5:00 PM",
+    "roomDetail_houseRules_1_text": "Checkout: 12:00 PM",
+    "roomDetail_houseRules_2_text": "No smoking",
+    "roomDetail_houseRules_3_text": "No pets",
+    "roomDetail_houseTitle": "House rules"
 }

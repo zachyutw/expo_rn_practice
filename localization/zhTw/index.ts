@@ -1,17 +1,17 @@
 import general from './zhTW-general.json';
-import login from './zhTw-login.json';
-import signUp from './zhTW-signUp.json';
-import welcome from './zhTw-welcome.json';
+import authorization from './zhTw-authorization.json';
 import home from './zhTW-home.json';
 import room from './zhTW-room.json';
 import navigation from './zhTw-navigation.json';
+import userConfig from './zhTW-userConfig.json';
+import notReady from './zhTw-notReady.json';
 
 export default {
     ...general,
-    ...login,
-    ...signUp,
-    ...welcome,
+    ...authorization,
     ...home,
     ...room,
     ...navigation,
+    ...userConfig,
+    ...notReady,
 } as any;

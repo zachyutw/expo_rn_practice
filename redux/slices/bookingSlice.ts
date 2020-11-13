@@ -2,7 +2,6 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import icsToJson from 'ics-to-json';
 import moment from 'moment';
-import { DateService } from '@ui-kitten/components';
 
 const icsUrl =
     'https://calendar.google.com/calendar/ical/clhipdh9r9fr8j8g70ohm1k9jg%40group.calendar.google.com/private-7dc318ba5665048bd57e9c338ad9ebbb/basic.ics';

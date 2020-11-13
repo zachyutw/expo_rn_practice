@@ -3,7 +3,7 @@ import EditProfile from './EditProfile';
 import NotReady from './NotReady';
 import { createStackNavigator } from '@react-navigation/stack';
 import UserConfig from './UserConfig';
-import { fetchCurrentUser } from '../../redux/slices/userSlice';
+import { fetchCurrentUserThunk } from '../../redux/slices/userSlice';
 import { useAppDispatch } from '../../redux/store';
 
 const Stack = createStackNavigator();
@@ -11,7 +11,7 @@ const Stack = createStackNavigator();
 const UserConfigStack = () => {
     const dispatch = useAppDispatch();
     useEffect(() => {
-        dispatch<any>(fetchCurrentUser());
+        dispatch<any>(fetchCurrentUserThunk());
     }, []);
     return (
         <Stack.Navigator headerMode="none">

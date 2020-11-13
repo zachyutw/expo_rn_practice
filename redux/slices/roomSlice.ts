@@ -56,7 +56,26 @@ type RoomInitialState = {
     loading: 'init' | 'fulfilled' | 'pending' | 'rejected';
 };
 
-const initialState = { entities: [], loading: 'init' } as RoomInitialState;
+const initialState = {
+    entities: [],
+    loading: 'init',
+    errors: {},
+} as RoomInitialState;
+
+const thunkFulfilled = (state, action) => {
+    state.entities = action.payload;
+    state.loading = 'fulfilled';
+};
+
+const thunkPending = (state) => {
+    state.loading = 'pending';
+    state.error = {};
+};
+
+const thunkRejected = (state, action) => {
+    state.loading = 'rejected';
+    state.error = action.error;
+};
 
 // Then, handle actions in your reducers:
 const slice = createSlice({
@@ -67,17 +86,9 @@ const slice = createSlice({
     },
     extraReducers: {
         // Add reducers for additional action types here, and handle loading state as needed
-        [`${fetchRoomsThunk.fulfilled}`]: (state, action) => {
-            // Add user to the state array
-            state.entities = action.payload;
-            state.loading = 'fulfilled';
-        },
-        [`${fetchRoomsThunk.pending}`]: (state) => {
-            state.loading = 'pending';
-        },
-        [`${fetchRoomsThunk.rejected}`]: (state) => {
-            state.loading = 'rejected';
-        },
+        [`${fetchRoomsThunk.fulfilled}`]: thunkFulfilled,
+        [`${fetchRoomsThunk.pending}`]: thunkPending,
+        [`${fetchRoomsThunk.rejected}`]: thunkRejected,
     },
 });
 

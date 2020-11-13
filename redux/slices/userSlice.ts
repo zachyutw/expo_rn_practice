@@ -5,7 +5,7 @@ import {
 } from '@reduxjs/toolkit';
 import { Platform } from 'react-native';
 import firebase from 'firebase';
-import { signOut } from './authorizationSlice';
+import { signOutThunk } from './authorizationSlice';
 import uuid from 'uuid-random';
 // import 'firebase/firestore';
 // import 'firebase/database';
@@ -59,8 +59,8 @@ const getCurrentUserData = async () => {
     return { displayName, phoneNumber, photoURL, id: uid, uid, ...userData };
 };
 
-export const fetchCurrentUser = createAsyncThunk(
-    'user/fetchCurrentUser',
+export const fetchCurrentUserThunk = createAsyncThunk(
+    'user/fetchCurrentUserThunk',
     async () => {
         try {
             const user = await getCurrentUserData();
@@ -71,8 +71,8 @@ export const fetchCurrentUser = createAsyncThunk(
     }
 );
 
-export const updateProfile = createAsyncThunk(
-    'user/updateProfile',
+export const updateProfileThunk = createAsyncThunk(
+    'user/updateProfileThunk',
     async (profile: any) => {
         try {
             await updateUserData(profile);
@@ -85,7 +85,7 @@ export const updateProfile = createAsyncThunk(
     }
 );
 
-const upLoadAvatar = async (result) => {
+const uploadAvatar = async (result) => {
     const { uid } = await firebase.auth().currentUser;
     const fileName = `images/${uid}/avatar.png`;
     const storageRef = firebase.storage().ref();
@@ -101,12 +101,12 @@ const upLoadAvatar = async (result) => {
     return { photoURL: downLoadURL };
 };
 
-export const updateAvatar = createAsyncThunk(
-    'user/updateAvatar',
+export const updateAvatarThunk = createAsyncThunk(
+    'user/updateAvatarThunk',
     async (result: any) => {
         try {
             // upload avatar image to firebase storage
-            await upLoadAvatar(result);
+            await uploadAvatar(result);
             const userData = await getCurrentUserData();
             return { ...userData };
         } catch (err) {
@@ -127,6 +127,23 @@ const initialState: userState = {
     loading: 'init',
     error: {},
 };
+
+const thunkFulfilled = (state, action) => {
+    // Add user to the state array
+    state.data = action.payload;
+    state.loading = 'fulfilled';
+};
+
+const thunkPending = (state) => {
+    state.loading = 'pending';
+    state.error = {};
+};
+
+const thunkRejected = (state, action) => {
+    state.loading = 'rejected';
+    state.error = action.error;
+};
+
 // Then, handle actions in your reducers:
 const userSlice = createSlice({
     name: 'user',
@@ -136,47 +153,16 @@ const userSlice = createSlice({
     },
     extraReducers: {
         // Add reducers for additional action types here, and handle loading state as needed
-        [`${fetchCurrentUser.fulfilled}`]: (state, action) => {
-            // Add user to the state array
-            state.data = action.payload;
-            state.loading = 'fulfilled';
-        },
-        [`${fetchCurrentUser.pending}`]: (state, action) => {
-            state.loading = 'pending';
-            state.error = {};
-        },
-        [`${fetchCurrentUser.rejected}`]: (state, action) => {
-            state.loading = 'rejected';
-            state.error = action.error;
-        },
-        [`${updateProfile.fulfilled}`]: (state, action) => {
-            // Add user to the state array
-            state.data = action.payload;
-            state.loading = 'fulfilled';
-        },
-        [`${updateProfile.pending}`]: (state) => {
-            state.loading = 'pending';
-            state.error = {};
-        },
-        [`${updateProfile.rejected}`]: (state, action) => {
-            state.loading = 'rejected';
-            state.error = action.error;
-        },
-        [`${updateAvatar.fulfilled}`]: (state, action) => {
-            // Add user to the state array
-            state.data = action.payload;
-            // console.log(action.payload);
-            state.loading = 'fulfilled';
-        },
-        [`${updateAvatar.pending}`]: (state) => {
-            state.loading = 'pending';
-            state.error = {};
-        },
-        [`${updateAvatar.rejected}`]: (state, action) => {
-            state.loading = 'rejected';
-            state.error = action.error;
-        },
-        [`${signOut.fulfilled}`]: (state) => {
+        [`${fetchCurrentUserThunk.fulfilled}`]: thunkFulfilled,
+        [`${fetchCurrentUserThunk.pending}`]: thunkPending,
+        [`${fetchCurrentUserThunk.rejected}`]: thunkRejected,
+        [`${updateProfileThunk.fulfilled}`]: thunkFulfilled,
+        [`${updateProfileThunk.pending}`]: thunkPending,
+        [`${updateProfileThunk.rejected}`]: thunkRejected,
+        [`${updateAvatarThunk.fulfilled}`]: thunkFulfilled,
+        [`${updateAvatarThunk.pending}`]: thunkPending,
+        [`${updateAvatarThunk.rejected}`]: thunkRejected,
+        [`${signOutThunk.fulfilled}`]: (state) => {
             state.data = {};
         },
     },

@@ -10,7 +10,7 @@ import Button from '../../components/Button/Button';
 import { AuthNavigationProps } from './navigation';
 import TextInput from '../../components/Form/TextInput';
 
-import { createUserByEmailPassword } from '../../redux/slices/authorizationSlice';
+import { createUserByEmailPasswordThunk } from '../../redux/slices/authorizationSlice';
 import { CommonActions } from '@react-navigation/native';
 import * as Facebook from 'expo-facebook';
 import * as GoogleSignIn from 'expo-google-sign-in';
@@ -57,7 +57,7 @@ const SignUp = ({ navigation }: AuthNavigationProps<'SignUp'>) => {
             remember: true,
         },
         onSubmit: ({ email, password }) => {
-            dispatch<any>(createUserByEmailPassword({ email, password }))
+            dispatch<any>(createUserByEmailPasswordThunk({ email, password }))
                 .then(unwrapResult)
                 .then(() => {
                     navigation.dispatch(

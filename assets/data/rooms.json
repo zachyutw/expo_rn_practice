@@ -13,7 +13,7 @@
         "colors": ["#BCC98F", "#E0E0E0", "#BE9F2D"],
         "price": "1000",
         "currency": "NT",
-        "description": "Signature Double Room, A natural and relaxing environment",
+        "description": "Pale green tonal, will smooth your impetuous mood, there is a piece of double bed inside the room, there is a cabinet dresser that finds a place for beside the bed, the end of the bed has a suit block, leave you that hopes to be able to read attentively specially.",
         "people": 2,
         "floor": 1
     },
@@ -31,7 +31,7 @@
         "colors": ["#544E3C", "#AA977F", "#A47D43"],
         "price": "1000",
         "currency": "NT",
-        "description": "Cure Double Room, Small and comfortable space",
+        "description": "Gray makes the world peaceful, this is our smallest room, but we put a lot of thought into making every place accessible to you, and when you're tired of all the traffic and fatigue of life, try this feeling of lifting your hand and making things light around you.",
         "people": 2,
         "floor": 1
     },
@@ -57,7 +57,7 @@
         ],
         "price": "2000",
         "currency": "NT",
-        "description": "Classic big room",
+        "description": "Super spacious room, independent sofa group, with hanging chair, so that guests can easily create a relaxed small party, let the joy permeate this room.",
         "people": 4,
         "floor": 2
     },
@@ -77,7 +77,7 @@
         "colors": ["#9AB0A8", "#7E7A64", "#967346", "#1E6E91"],
         "price": "2000",
         "currency": "NT",
-        "description": "Parenting room",
+        "description": "The most suitable room for parent-child accommodation, double beds with upper and lower bunk beds are designed to allow children and adults to share the joy of the secret base. There is a small but decorated balcony outside the bed, very suitable when having a rest in the afternoon, appreciate beautiful sunset.",
         "people": 4,
         "floor": 2
     },
@@ -107,7 +107,7 @@
         ],
         "price": "2000",
         "currency": "NT",
-        "description": "Landscape room",
+        "description": "Located at the top of the loft, with a fine view, you can enjoy the green hills outside the window in the dewy mid-morning. The open space, with red brick walls and wooden floors, will lead guests to a space dedicated to relaxation.",
         "people": 4,
         "floor": 3
     }

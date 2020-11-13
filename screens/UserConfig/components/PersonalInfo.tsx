@@ -9,7 +9,7 @@ import * as Yup from 'yup';
 import { unwrapResult } from '@reduxjs/toolkit';
 import Button from '../../../components/Button/RectButton';
 import { useAppSelector, useAppDispatch } from '../../../redux/store';
-import { updateProfile } from '../../../redux/slices/userSlice';
+import { updateProfileThunk } from '../../../redux/slices/userSlice';
 const genders = [
     { value: 'male', label: 'Male' },
     { value: 'female', label: 'Female' },
@@ -36,7 +36,7 @@ const PersonalInfo = () => {
         validationSchema: UserSchema,
         initialValues: { displayName, address },
         onSubmit: (submitValues) => {
-            dispatch<any>(updateProfile(submitValues));
+            dispatch<any>(updateProfileThunk(submitValues));
             // dispatch<any>(signInWithEmailAndPassword({ email, password }))
             //     .then(unwrapResult)
             //     .then(() => {

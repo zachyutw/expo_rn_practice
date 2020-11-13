@@ -3,10 +3,10 @@ import { Image, TouchableWithoutFeedback, StyleSheet } from 'react-native';
 import { SharedElement } from 'react-navigation-shared-element';
 import { useNavigation } from '@react-navigation/native';
 import { t } from 'i18n-js';
+import { Ionicons } from '@expo/vector-icons';
 
 import { Room } from '../../../redux/slices/roomSlice';
 import { Box, Text } from '../../../components/Basic';
-import { Ionicons } from '@expo/vector-icons';
 import { theme } from '../../../styles/Theme';
 import constants from '../constants';
 import PaletteItem from './PaletteItem';

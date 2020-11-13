@@ -12,7 +12,7 @@ import { AuthNavigationProps } from './navigation';
 import TextInput from '../../components/Form/TextInput';
 import Checkbox from '../../components/Form/Checkbox';
 import Footer from './components/Footer';
-import { signInWithEmailAndPassword } from '../../redux/slices/authorizationSlice';
+import { signInWithEmailAndPasswordThunk } from '../../redux/slices/authorizationSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { unwrapResult } from '@reduxjs/toolkit';
 import constants from './constants';
@@ -46,7 +46,7 @@ const Login = ({ navigation }: AuthNavigationProps<'Login'>) => {
         validationSchema: LoginSchema,
         initialValues: { email: '', password: '', remember: true },
         onSubmit: ({ email, password }) => {
-            dispatch<any>(signInWithEmailAndPassword({ email, password }))
+            dispatch<any>(signInWithEmailAndPasswordThunk({ email, password }))
                 .then(unwrapResult)
                 .then(() => {
                     navigation.dispatch(

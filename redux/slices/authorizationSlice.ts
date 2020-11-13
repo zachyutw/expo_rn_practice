@@ -8,8 +8,8 @@ import firebase from 'firebase';
 
 // First, create the thunk
 
-export const createUserByEmailPassword = createAsyncThunk(
-    'authorization/createUserByEmailPassword',
+export const createUserByEmailPasswordThunk = createAsyncThunk(
+    'authorization/createUserByEmailPasswordThunk',
     async (params: any) => {
         try {
             await firebase
@@ -31,8 +31,8 @@ export const createUserByEmailPassword = createAsyncThunk(
     }
 );
 
-export const signInWithEmailAndPassword = createAsyncThunk(
-    'authorization/signInWithEmailAndPassword',
+export const signInWithEmailAndPasswordThunk = createAsyncThunk(
+    'authorization/signInWithEmailAndPasswordThunk',
     async ({ email, password }: any) => {
         try {
             return await firebase
@@ -44,14 +44,17 @@ export const signInWithEmailAndPassword = createAsyncThunk(
     }
 );
 
-export const signOut = createAsyncThunk('authorization/signOut', async () => {
-    try {
-        await firebase.auth().signOut();
-        return {};
-    } catch (err) {
-        throw err;
+export const signOutThunk = createAsyncThunk(
+    'authorization/signOutThunk',
+    async () => {
+        try {
+            await firebase.auth().signOut();
+            return {};
+        } catch (err) {
+            throw err;
+        }
     }
-});
+);
 
 interface authorizationState {
     loading: string;
@@ -64,6 +67,23 @@ const initialState: authorizationState = {
     loading: 'init',
     error: {},
 };
+
+const thunkFulfilled = (state, action) => {
+    // Add user to the state array
+    state.credit = action.payload;
+    state.loading = 'fulfilled';
+};
+
+const thunkPending = (state) => {
+    state.loading = 'pending';
+    state.error = {};
+};
+
+const thunkRejected = (state, action) => {
+    state.loading = 'rejected';
+    state.error = action.error;
+};
+
 // Then, handle actions in your reducers:
 const authorizationSlice = createSlice({
     name: 'authorization',
@@ -73,38 +93,15 @@ const authorizationSlice = createSlice({
     },
     extraReducers: {
         // Add reducers for additional action types here, and handle loading state as needed
-        [`${createUserByEmailPassword.fulfilled}`]: (state, action) => {
-            // Add user to the state array
-            state.credit = action.payload;
-            state.loading = 'fulfilled';
-        },
-        [`${createUserByEmailPassword.pending}`]: (state) => {
-            state.loading = 'pending';
-
-            state.error = {};
-        },
-        [`${createUserByEmailPassword.rejected}`]: (state, action) => {
-            state.loading = 'rejected';
-            state.error = action.error;
-        },
-        [`${signInWithEmailAndPassword.fulfilled}`]: (state, action) => {
-            // Add user to the state array
-            state.credit = action.payload;
-            state.loading = 'fulfilled';
-        },
-        [`${signInWithEmailAndPassword.pending}`]: (state, action) => {
-            state.loading = 'pending';
-            state.error = {};
-        },
-        [`${signInWithEmailAndPassword.rejected}`]: (state, action) => {
-            state.loading = 'rejected';
-            state.error = action.error;
-        },
-        [`${signOut.fulfilled}`]: (state) => {
-            // Add user to the state array
-            state.credit = {};
-            state.loading = 'fulfilled';
-        },
+        [`${createUserByEmailPasswordThunk.fulfilled}`]: thunkFulfilled,
+        [`${createUserByEmailPasswordThunk.pending}`]: thunkPending,
+        [`${createUserByEmailPasswordThunk.rejected}`]: thunkRejected,
+        [`${signInWithEmailAndPasswordThunk.fulfilled}`]: thunkFulfilled,
+        [`${signInWithEmailAndPasswordThunk.pending}`]: thunkPending,
+        [`${signInWithEmailAndPasswordThunk.rejected}`]: thunkRejected,
+        [`${signOutThunk.fulfilled}`]: thunkFulfilled,
+        [`${signOutThunk.pending}`]: thunkPending,
+        [`${signOutThunk.rejected}`]: thunkRejected,
     },
 });
 

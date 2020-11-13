@@ -1,78 +1,78 @@
 export default {
     container: {
-        skip: 'Skip',
+        skip: 'container_skip',
     },
     welcome: {
-        title1: "Let's get started",
-        title3: 'Login to your account below or sign up',
-        loginButton: 'Have an account? Login',
-        signUpButton: 'Join us, it’s Free',
+        title1: 'welcome_title1',
+        title3: 'welcome_title3',
+        loginButton: 'welcome_loginButton',
+        signUpButton: 'welcome_signUpButton',
     },
     login: {
-        title1: 'Welcome back',
-        body: 'Use your credentials below and login to your account',
+        title1: 'login_title1',
+        body: 'login_body',
         form: {
             email: {
-                placeholder: 'Enter your Email',
+                placeholder: 'form_email_placeholder',
                 errors: {
                     invalid: 'Invalid email',
-                    required: 'Required',
+                    required: 'form_errors_required',
                 },
             },
             password: {
-                placeholder: 'Enter your Password',
+                placeholder: 'form_password_placeholder',
                 errors: {
-                    min: 'Too Short!',
-                    max: 'Too Long!',
-                    required: 'Required',
+                    min: 'form_errors_min',
+                    max: 'form_errors_max',
+                    required: 'form_errors_required',
                 },
             },
             remember: {
-                label: 'Remember me',
+                label: 'form_password_label',
             },
         },
-        forgotPassword: 'Forgot password',
-        loginButton: 'Have an account? Login',
-        signUpButton: 'Join us, it’s Free',
+        forgotPassword: 'login_forgotPassword',
+        loginButton: 'login_loginButton',
+        signUpButton: 'login_signUpButton',
         footer: {
-            title: 'Don’t have an account?',
-            action: 'Sign Up here',
+            title: 'login_footer_title',
+            action: 'login_footer_action',
         },
     },
     signUp: {
-        title1: 'Create account',
-        body: 'Let’s us know what your name, email, and your password',
+        title1: 'signUp_title1',
+        body: 'signUp_body',
         form: {
             email: {
-                placeholder: 'Enter your Email',
+                placeholder: 'form_email_placeholder',
                 errors: {
                     invalid: 'Invalid email',
-                    required: 'Required',
+                    required: 'form_errors_required',
                 },
             },
             password: {
-                placeholder: 'Enter your Password',
+                placeholder: 'form_password_placeholder',
                 errors: {
-                    min: 'Too Short!',
-                    max: 'Too Long!',
-                    required: 'Required',
+                    min: 'form_errors_min',
+                    max: 'form_errors_max',
+                    required: 'form_errors_required',
                 },
             },
             passwordConfirmation: {
-                placeholder: 'Confirm your Password',
+                placeholder: 'form_passwordConfirmation_placeholder',
                 errors: {
-                    equals: "Passwords don't match",
-                    required: 'Required',
+                    equals: 'form_passwordConfirmation_errors_equals',
+                    required: 'form_errors_required',
                 },
             },
             remember: {
-                label: 'Remember me',
+                label: 'form_password_label',
             },
         },
-        submitButton: 'Create your account',
+        submitButton: 'signUp_submitButton',
         footer: {
-            title: 'Already have an account?',
-            action: 'Login here',
+            title: 'signUp_footer_title',
+            action: 'signUp_footer_action',
         },
     },
 };

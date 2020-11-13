@@ -6,7 +6,10 @@ import { Box, Text } from '../../components/Basic';
 import { useTheme } from '../../styles/Theme';
 import Header from './components/Header';
 
-import { fetchCurrentUser, updateAvatar } from '../../redux/slices/userSlice';
+import {
+    fetchCurrentUserThunk,
+    updateAvatarThunk,
+} from '../../redux/slices/userSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import PersonalInfo from './components/PersonalInfo';
 import Spinner from '../../components/AppLoading/Spinner';
@@ -45,7 +48,7 @@ const EditProfile = ({ navigation }: HomeNavigationProps<'EditProfile'>) => {
         });
 
         if (!result.cancelled) {
-            dispatch<any>(updateAvatar(result));
+            dispatch<any>(updateAvatarThunk(result));
         }
     };
     return (

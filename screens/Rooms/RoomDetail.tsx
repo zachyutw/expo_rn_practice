@@ -7,11 +7,16 @@ import {
     Animated,
     ScrollView,
 } from 'react-native';
+import { t } from 'i18n-js';
+
 import { Box, Text } from '../../components/Basic';
 import { Room } from '../../redux/slices/roomSlice';
 import { SharedElement } from 'react-navigation-shared-element';
 import Carousel from 'react-native-snap-carousel';
 import PaletteItem from './components/PaletteItem';
+import constants from './constants';
+
+const { roomDetail: Constants } = constants;
 
 const { width, height } = Dimensions.get('window');
 const styles = StyleSheet.create({
@@ -130,31 +135,37 @@ const RoomDetail = ({ route }) => {
             </Box>
             <Box flex={1} padding="m">
                 <Text marginVertical="l" variant="title3">
-                    House Rules
+                    {t(Constants.houseTitle)}
                 </Text>
                 <Box flex={1} flexDirection="row" alignItems="center">
                     <Text variant="body">@</Text>
-                    <Text variant="body">Check-in: After 5:00 PM</Text>
+                    <Text variant="body">
+                        {t(Constants.houseRules[0].text)}
+                    </Text>
                 </Box>
                 <Box flex={1} flexDirection="row" alignItems="center">
                     <Text variant="body">@</Text>
-                    <Text variant="body">Checkout: 12:00 PM</Text>
+                    <Text variant="body">
+                        {t(Constants.houseRules[1].text)}
+                    </Text>
                 </Box>
                 <Box flex={1} flexDirection="row" alignItems="center">
                     <Text variant="body">@</Text>
-                    <Text variant="body">No smoking</Text>
+                    <Text variant="body">
+                        {t(Constants.houseRules[2].text)}
+                    </Text>
                 </Box>
                 <Box flex={1} flexDirection="row" alignItems="center">
                     <Text variant="body">@</Text>
-                    <Text variant="body">No pets</Text>
+                    <Text variant="body">
+                        {t(Constants.houseRules[3].text)}
+                    </Text>
                 </Box>
 
                 <Text marginVertical="l" variant="title3">
-                    Additional rules
+                    {t(Constants.additionalRule.title)}
                 </Text>
-                <Text>
-                    屋內各個傢俱、電器用品請勿任意移動攜出，用畢的廚具需要清潔，屋內需脫鞋，有提供室內/外拖鞋，屋內禁止吸菸，若要吸菸請到庭院外或戶外陽台。
-                </Text>
+                <Text variant="body">{t(Constants.additionalRule.text)}</Text>
             </Box>
         </ScrollView>
     );

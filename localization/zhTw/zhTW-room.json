@@ -1,4 +1,11 @@
 {
-    "Bedrooms Introduce": "房間介紹",
-    "roomDetail people": "%{people}人"
+    "room_title1": "房間介紹",
+    "roomDetail_people": "%{people}人",
+    "roomDetail_additionalRule_title": "Additional rules",
+    "roomDetail_additionalRule_text": "屋內各個傢俱、電器用品請勿任意移動攜出，用畢的廚具需要清潔，屋內需脫鞋，有提供室內/外拖鞋，屋內禁止吸菸，若要吸菸請到庭院外或戶外陽台。",
+    "roomDetail_houseRules_0_text": "Check-in:  After 5:00 PM",
+    "roomDetail_houseRules_1_text": "Checkout: 12:00 PM",
+    "roomDetail_houseRules_2_text": "No smoking",
+    "roomDetail_houseRules_3_text": "No pets",
+    "roomDetail_houseTitle": "House rules"
 }
