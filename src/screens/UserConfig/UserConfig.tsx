@@ -6,14 +6,14 @@ import {
     DrawerActions,
 } from '@react-navigation/native';
 import { t } from 'i18n-js';
+import { unwrapResult } from '@reduxjs/toolkit';
 
 import { Box, Text } from '../../components/Basic';
 import { useTheme } from '../../styles/Theme';
 import DrawerItem, { DrawerItemProps } from './components/DrawerItem';
 import Container from './components/Container';
-import Header from './components/Header';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
-import { unwrapResult } from '@reduxjs/toolkit';
+
 import { signOutThunk } from '../../redux/slices/authorizationSlice';
 import Spinner from '../../components/AppLoading/Spinner';
 import constants from './constants';
